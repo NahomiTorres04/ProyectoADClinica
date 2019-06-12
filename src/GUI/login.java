@@ -330,6 +330,7 @@ public class login extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tempus Sans ITC", 1, 28)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reg.png"))); // NOI18N
         p1registrar.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -15, 200, -1));
 
         RSPRegistrar.add(p1registrar, "card2");
