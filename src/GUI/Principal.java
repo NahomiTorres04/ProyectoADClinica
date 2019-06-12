@@ -5,17 +5,51 @@
  */
 package GUI;
 
+import com.sun.awt.AWTUtilities;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import rojerusan.RSPanelsSlider;
+
 /**
  *
  * @author Nahomi
  */
 public class Principal extends javax.swing.JFrame {
-
+String ruta1 = "\\src\\Imagenes\\f3.jpg";
+String ruta2 = "\\src\\Imagenes\\blanco.jpg";
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        AWTUtilities.setWindowOpaque(this,false); //hacemos el frame transparente
+        transparencia(ruta1, 400,1000, 0.55f, minimenu);
+        transparencia(ruta2, 100, 1000, 0.55f, lbbotones);
+    }
+    private void transparencia(String ruta, int tamhorizontal, int tamvertical, float valor, JLabel label)
+    {
+        try
+        {
+            BufferedImage bim = ImageIO.read(new File(System.getProperty("user.dir") + ruta)); //creo un bufferimage con una imagen para el fondo
+            BufferedImage nbim = new BufferedImage (tamhorizontal,tamvertical, BufferedImage.TYPE_4BYTE_ABGR_PRE); //creo otro bufferimage y le doy medidas, x, y y le doy el efecto de color que quiero
+            Graphics2D createGraphics = nbim.createGraphics(); // creo una grafica a partir de la imagen
+            createGraphics.drawImage(bim, null, 0, 0); //la dibujo
+            float alp[] = new float[]{1f,1f,1f,valor}; // creo un vector con los valores para crear el efecto de transparencia
+            float def [] = new float[]{0,0,0,0}; 
+            RescaleOp r = new RescaleOp(alp, def, null);
+            BufferedImage filter = r.filter(nbim, null); //creo un bufferimage con mi filtro y le mando la imagen que cree antes
+            label.setIcon(new ImageIcon(filter)); 
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -27,21 +61,172 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jcMousePanel1 = new jcMousePanel.jcMousePanel();
+        botones = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        lbbotones = new javax.swing.JLabel();
+        pminimenu = new javax.swing.JPanel();
+        rsminimenu = new rojerusan.RSPanelsSlider();
+        pvacio = new javax.swing.JPanel();
+        pempleado = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        rSMaterialButtonRectangle1 = new rojerusan.RSMaterialButtonRectangle();
+        minimenu = new javax.swing.JLabel();
+        ventana = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        rsmenu = new rojerusan.RSPanelsSlider();
+        principal = new javax.swing.JPanel();
+        pingresarE = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jcMousePanel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo-24131_960_720.png"))); // NOI18N
+
+        javax.swing.GroupLayout jcMousePanel1Layout = new javax.swing.GroupLayout(jcMousePanel1);
+        jcMousePanel1.setLayout(jcMousePanel1Layout);
+        jcMousePanel1Layout.setHorizontalGroup(
+            jcMousePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jcMousePanel1Layout.setVerticalGroup(
+            jcMousePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jcMousePanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 240, 240));
+
+        botones.setBackground(new java.awt.Color(204, 204, 255));
+        botones.setOpaque(false);
+        botones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-team-50.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-team-75.png"))); // NOI18N
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        botones.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 20, 90, 80));
+
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        jLabel1.setText("Empleados");
+        botones.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 70, -1));
+
+        lbbotones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbbotonesMouseClicked(evt);
+            }
+        });
+        botones.add(lbbotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 750));
+
+        getContentPane().add(botones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 90, 750));
+
+        pminimenu.setBackground(new java.awt.Color(255, 255, 255));
+        pminimenu.setOpaque(false);
+        pminimenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        rsminimenu.setOpaque(false);
+
+        pvacio.setName("pvacio"); // NOI18N
+        pvacio.setOpaque(false);
+
+        javax.swing.GroupLayout pvacioLayout = new javax.swing.GroupLayout(pvacio);
+        pvacio.setLayout(pvacioLayout);
+        pvacioLayout.setHorizontalGroup(
+            pvacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 330, Short.MAX_VALUE)
+        );
+        pvacioLayout.setVerticalGroup(
+            pvacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 750, Short.MAX_VALUE)
+        );
+
+        rsminimenu.add(pvacio, "card2");
+
+        pempleado.setName("pempleado"); // NOI18N
+        pempleado.setOpaque(false);
+        pempleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton3.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 18)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-add-user-group-man-woman-45.png"))); // NOI18N
+        jButton3.setText("   Nuevo Empleado   ");
+        jButton3.setToolTipText("");
+        jButton3.setActionCommand("   Nuevo Empleado   ");
+        jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.setDefaultCapable(false);
+        jButton3.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-add-user-group-man-woman-55.png"))); // NOI18N
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        pempleado.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 185, 270, 50));
+
+        rSMaterialButtonRectangle1.setBackground(new java.awt.Color(255, 255, 255));
+        rSMaterialButtonRectangle1.setText("fingresare");
+        pempleado.add(rSMaterialButtonRectangle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 290, 60));
+
+        rsminimenu.add(pempleado, "card3");
+
+        pminimenu.add(rsminimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 750));
+        pminimenu.add(minimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 750));
+
+        getContentPane().add(pminimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 330, 750));
+
+        ventana.setBackground(new java.awt.Color(255, 255, 255));
+        ventana.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-cancel-45.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        ventana.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(831, 13, -1, 52));
+
+        principal.setBackground(new java.awt.Color(255, 255, 255));
+        principal.setName("principal"); // NOI18N
+        principal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        rsmenu.add(principal, "card3");
+
+        pingresarE.setBackground(new java.awt.Color(255, 255, 255));
+        pingresarE.setName("pingresarE"); // NOI18N
+        pingresarE.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        rsmenu.add(pingresarE, "card2");
+
+        ventana.add(rsmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 750));
+
+        getContentPane().add(ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 900, 750));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+       System.exit(0);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void lbbotonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbbotonesMouseClicked
+
+    }//GEN-LAST:event_lbbotonesMouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        rsmenu.setPanelSlider((int) 1.2, pingresarE, RSPanelsSlider.DIRECT.LEFT);
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        rsminimenu.setPanelSlider((int)1.2,pempleado, RSPanelsSlider.DIRECT.UP);
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -79,5 +264,22 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel botones;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private jcMousePanel.jcMousePanel jcMousePanel1;
+    private javax.swing.JLabel lbbotones;
+    private javax.swing.JLabel minimenu;
+    private javax.swing.JPanel pempleado;
+    private javax.swing.JPanel pingresarE;
+    private javax.swing.JPanel pminimenu;
+    private javax.swing.JPanel principal;
+    private javax.swing.JPanel pvacio;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
+    private rojerusan.RSPanelsSlider rsmenu;
+    private rojerusan.RSPanelsSlider rsminimenu;
+    private javax.swing.JPanel ventana;
     // End of variables declaration//GEN-END:variables
 }
