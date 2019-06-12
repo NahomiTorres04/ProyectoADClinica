@@ -9,6 +9,7 @@ package GUI;
  *
  * @author Nahomi
  */
-public class Main {
-    
+public class Main 
+{
+    private Ususario usuario;
 }
