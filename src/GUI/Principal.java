@@ -78,6 +78,51 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
         rsmenu = new rojerusan.RSPanelsSlider();
         principal = new javax.swing.JPanel();
         pingresarE = new javax.swing.JPanel();
+        cmbtipo = new javax.swing.JComboBox<>();
+        txtnombreE = new javax.swing.JTextField();
+        rSMaterialButtonRectangle5 = new rojerusan.RSMaterialButtonRectangle();
+        cmbrenglonp = new javax.swing.JComboBox<>();
+        txtpuesto = new javax.swing.JTextField();
+        cmblugar = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        txtdpi = new javax.swing.JTextField();
+        rSMaterialButtonRectangle29 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle27 = new rojerusan.RSMaterialButtonRectangle();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        rSMaterialButtonRectangle23 = new rojerusan.RSMaterialButtonRectangle();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        rSMaterialButtonRectangle19 = new rojerusan.RSMaterialButtonRectangle();
+        txtcargo = new javax.swing.JTextField();
+        txtsueldo = new javax.swing.JTextField();
+        cmbclasificacion = new javax.swing.JComboBox<>();
+        rSMaterialButtonRectangle25 = new rojerusan.RSMaterialButtonRectangle();
+        txttelE = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        txtapellidoE = new javax.swing.JTextField();
+        jLabel42 = new javax.swing.JLabel();
+        rSMaterialButtonRectangle26 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle17 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle28 = new rojerusan.RSMaterialButtonRectangle();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        cmbdepartamento = new javax.swing.JComboBox<>();
+        jLabel34 = new javax.swing.JLabel();
+        rSMaterialButtonRectangle6 = new rojerusan.RSMaterialButtonRectangle();
+        jLabel46 = new javax.swing.JLabel();
+        txtmunicipio = new javax.swing.JTextField();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        rSMaterialButtonRectangle22 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle24 = new rojerusan.RSMaterialButtonRectangle();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        rSMaterialButtonRectangle20 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle21 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle18 = new rojerusan.RSMaterialButtonRectangle();
+        jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -156,7 +201,7 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
         jButton3.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 18)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-add-user-group-man-woman-45.png"))); // NOI18N
         jButton3.setText("   Nuevo Empleado   ");
-        jButton3.setToolTipText("");
+        jButton3.setToolTipText("ingresar nuevo empleado");
         jButton3.setActionCommand("   Nuevo Empleado   ");
         jButton3.setBorder(null);
         jButton3.setBorderPainted(false);
@@ -193,7 +238,7 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
                 jButton1MouseClicked(evt);
             }
         });
-        ventana.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(831, 13, -1, 52));
+        ventana.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, -1, 52));
 
         principal.setBackground(new java.awt.Color(255, 255, 255));
         principal.setName("principal"); // NOI18N
@@ -203,11 +248,203 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
         pingresarE.setBackground(new java.awt.Color(255, 255, 255));
         pingresarE.setName("pingresarE"); // NOI18N
         pingresarE.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cmbtipo.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 18)); // NOI18N
+        cmbtipo.setForeground(new java.awt.Color(0, 52, 102));
+        cmbtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Centro de Salud", "Puesto de Salud", "Racana", "Territorio I", "Territorio II", "Territorio III", "Territorio IV", "Territorio V", "Territorio VI", "Territorio VII" }));
+        cmbtipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbtipoItemStateChanged(evt);
+            }
+        });
+        pingresarE.add(cmbtipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 470, 270, -1));
+
+        txtnombreE.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        txtnombreE.setBorder(null);
+        pingresarE.add(txtnombreE, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 300, 30));
+
+        rSMaterialButtonRectangle5.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle5.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 320, 50));
+
+        cmbrenglonp.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 18)); // NOI18N
+        cmbrenglonp.setForeground(new java.awt.Color(0, 52, 102));
+        cmbrenglonp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "011", "182", "189", "029", "036" }));
+        pingresarE.add(cmbrenglonp, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 190, 100, 30));
+
+        txtpuesto.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        txtpuesto.setBorder(null);
+        pingresarE.add(txtpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 380, 30));
+
+        cmblugar.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        cmblugar.setBorder(null);
+        cmblugar.setEnabled(false);
+        pingresarE.add(cmblugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 590, 330, 30));
+
+        jLabel32.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel32.setText("Municipio:");
+        pingresarE.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 130, 30));
+
+        txtdpi.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        txtdpi.setBorder(null);
+        pingresarE.add(txtdpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 300, 30));
+
+        rSMaterialButtonRectangle29.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle29.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle29, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 320, 50));
+
+        rSMaterialButtonRectangle27.setBackground(new java.awt.Color(186, 240, 255));
+        pingresarE.add(rSMaterialButtonRectangle27, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 520, 200, 50));
+
+        jRadioButton4.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton4.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jRadioButton4.setText("Otro");
+        pingresarE.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 470, -1, -1));
+
+        rSMaterialButtonRectangle23.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle23.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle23, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 300, 50));
+
+        jLabel38.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel38.setText("Emergencia(tel):");
+        pingresarE.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 590, 200, 30));
+
+        jLabel41.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel41.setText("Renglón presupuestario:");
+        pingresarE.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 290, 30));
+
+        rSMaterialButtonRectangle19.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle19.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle19, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, 290, 50));
+
+        txtcargo.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        txtcargo.setBorder(null);
+        pingresarE.add(txtcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 300, 30));
+
+        txtsueldo.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        txtsueldo.setBorder(null);
+        pingresarE.add(txtsueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 530, 280, 30));
+
+        cmbclasificacion.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 18)); // NOI18N
+        cmbclasificacion.setForeground(new java.awt.Color(0, 52, 102));
+        cmbclasificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una clasificación", "Tipo A", "Tipo B" }));
+        pingresarE.add(cmbclasificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 530, 180, 30));
+
+        rSMaterialButtonRectangle25.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle25.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle25, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 320, 50));
+
+        txttelE.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        txttelE.setBorder(null);
+        pingresarE.add(txttelE, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 590, 180, 30));
+
+        jLabel37.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel37.setText("Fecha de deserción:");
+        pingresarE.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 430, 330, 30));
+
+        txtapellidoE.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        txtapellidoE.setBorder(null);
+        pingresarE.add(txtapellidoE, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 300, 30));
+
+        jLabel42.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel42.setText("DPI:");
+        pingresarE.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 120, 30));
+
+        rSMaterialButtonRectangle26.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle26.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle26, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 180, 120, 50));
+
+        rSMaterialButtonRectangle17.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle17.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 320, 50));
+
+        rSMaterialButtonRectangle28.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle28.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle28, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 580, 200, 50));
+
+        jLabel40.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel40.setText("Profesión:");
+        pingresarE.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 290, 30));
+
+        jLabel39.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel39.setText("Fecha de contraración:");
+        pingresarE.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 330, 30));
+
+        jLabel33.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel33.setText("Departamento:");
+        pingresarE.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 190, 30));
+
+        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton3.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jRadioButton3.setText("Otro");
+        pingresarE.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 530, -1, 30));
+
+        cmbdepartamento.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 18)); // NOI18N
+        cmbdepartamento.setForeground(new java.awt.Color(0, 52, 102));
+        cmbdepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Totonicapán", "Quetzaltenango", "Guatemala", "Izabal", "Petén", "Huehuetenango", "Quiché", "Alta Verapaz", "San Marcos", "Sololá", "Chimaltenango", "Sacatepéquez", "Baja Verapaz", "El Progreso", "Jalapa", "Zacapa", "Chiquimula", "Retalhuleu", "Suchitepéquez", "Escuintla", "Santa Rosa", "Jutiapa" }));
+        pingresarE.add(cmbdepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 410, -1));
+
+        jLabel34.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel34.setText("Tipo:");
+        pingresarE.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 80, 30));
+
+        rSMaterialButtonRectangle6.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle6.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 320, 50));
+
+        jLabel46.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel46.setText("Sueldo:");
+        pingresarE.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 530, 90, 30));
+
+        txtmunicipio.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        txtmunicipio.setBorder(null);
+        pingresarE.add(txtmunicipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 300, 30));
+
+        jLabel45.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel45.setText("Cargo:");
+        pingresarE.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 150, 30));
+
+        jLabel36.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel36.setText("Lugar:");
+        pingresarE.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 590, 90, 30));
+
+        rSMaterialButtonRectangle22.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle22.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle22, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 460, 400, 50));
+
+        rSMaterialButtonRectangle24.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle24.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle24, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, 400, 50));
+
+        jLabel35.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel35.setText("Clasificación:");
+        pingresarE.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 160, 30));
+
+        jLabel20.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel20.setText("Nombres:");
+        pingresarE.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 150, 30));
+
+        rSMaterialButtonRectangle20.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle20.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle20, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, 350, 50));
+
+        rSMaterialButtonRectangle21.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle21.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle21, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 400, 50));
+
+        rSMaterialButtonRectangle18.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle18.setEnabled(false);
+        pingresarE.add(rSMaterialButtonRectangle18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 430, 50));
+
+        jLabel23.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        jLabel23.setText("Apellidos:");
+        pingresarE.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 150, 30));
+
         rsmenu.add(pingresarE, "card2");
 
-        ventana.add(rsmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 750));
+        ventana.add(rsmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 750));
 
-        getContentPane().add(ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 900, 750));
+        getContentPane().add(ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 1010, 750));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -227,6 +464,29 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         rsminimenu.setPanelSlider((int)1.2,pempleado, RSPanelsSlider.DIRECT.UP);
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void cmbtipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbtipoItemStateChanged
+        String tipo = cmbtipo.getSelectedItem().toString();
+        if(tipo.equals("Centro de Salud"))
+        {
+            cmbclasificacion.setEnabled(true);
+            cmblugar.setEnabled(false);
+            cmblugar.setText("");
+        }
+        else if(tipo.equals("Puesto de Salud"))
+        {
+            cmblugar.setEnabled(true);
+            cmbclasificacion.setEnabled(false);
+            cmbclasificacion.setSelectedIndex(0);
+        }
+        else
+        {
+            cmblugar.setEnabled(false);
+            cmbclasificacion.setEnabled(false);
+            cmblugar.setText("");
+            cmbclasificacion.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_cmbtipoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -265,10 +525,32 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botones;
+    private javax.swing.JComboBox<String> cmbclasificacion;
+    private javax.swing.JComboBox<String> cmbdepartamento;
+    private javax.swing.JTextField cmblugar;
+    private javax.swing.JComboBox<String> cmbrenglonp;
+    private javax.swing.JComboBox<String> cmbtipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     private jcMousePanel.jcMousePanel jcMousePanel1;
     private javax.swing.JLabel lbbotones;
     private javax.swing.JLabel minimenu;
@@ -278,8 +560,31 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
     private javax.swing.JPanel principal;
     private javax.swing.JPanel pvacio;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle17;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle18;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle19;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle20;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle21;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle22;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle23;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle24;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle25;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle26;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle27;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle28;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle29;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle5;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle6;
     private rojerusan.RSPanelsSlider rsmenu;
     private rojerusan.RSPanelsSlider rsminimenu;
+    private javax.swing.JTextField txtapellidoE;
+    private javax.swing.JTextField txtcargo;
+    private javax.swing.JTextField txtdpi;
+    private javax.swing.JTextField txtmunicipio;
+    private javax.swing.JTextField txtnombreE;
+    private javax.swing.JTextField txtpuesto;
+    private javax.swing.JTextField txtsueldo;
+    private javax.swing.JTextField txttelE;
     private javax.swing.JPanel ventana;
     // End of variables declaration//GEN-END:variables
 }
