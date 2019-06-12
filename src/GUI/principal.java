@@ -14,18 +14,19 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import rojerusan.RSPanelsSlider;
+import rojerusan.RSTableMetro;
 
 /**
  *
  * @author Nahomi
  */
-public class Principal extends javax.swing.JFrame {
+public class principal extends javax.swing.JFrame {
 String ruta1 = "\\src\\Imagenes\\f3.jpg";
 String ruta2 = "\\src\\Imagenes\\blanco.jpg";
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public principal() {
         initComponents();
         this.setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this,false); //hacemos el frame transparente
@@ -72,6 +73,8 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
         pempleado = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         rSMaterialButtonRectangle1 = new rojerusan.RSMaterialButtonRectangle();
+        jButton4 = new javax.swing.JButton();
+        rSMaterialButtonRectangle2 = new rojerusan.RSMaterialButtonRectangle();
         minimenu = new javax.swing.JLabel();
         ventana = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -123,6 +126,8 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
         rSMaterialButtonRectangle21 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle18 = new rojerusan.RSMaterialButtonRectangle();
         jLabel23 = new javax.swing.JLabel();
+        pverEmpleado = new javax.swing.JPanel();
+        rSMaterialButtonRectangle30 = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -200,7 +205,7 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
 
         jButton3.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 18)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-add-user-group-man-woman-45.png"))); // NOI18N
-        jButton3.setText("   Nuevo Empleado   ");
+        jButton3.setText("      Nuevo Empleado        ");
         jButton3.setToolTipText("ingresar nuevo empleado");
         jButton3.setActionCommand("   Nuevo Empleado   ");
         jButton3.setBorder(null);
@@ -218,6 +223,26 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
         rSMaterialButtonRectangle1.setBackground(new java.awt.Color(255, 255, 255));
         rSMaterialButtonRectangle1.setText("fingresare");
         pempleado.add(rSMaterialButtonRectangle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 290, 60));
+
+        jButton4.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 18)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-user-folder-45.png"))); // NOI18N
+        jButton4.setText("  Empleados Contratados  ");
+        jButton4.setToolTipText("ingresar nuevo empleado");
+        jButton4.setBorder(null);
+        jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
+        jButton4.setDefaultCapable(false);
+        jButton4.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-user-folder-55.png"))); // NOI18N
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        pempleado.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 256, 270, 50));
+
+        rSMaterialButtonRectangle2.setBackground(new java.awt.Color(255, 255, 255));
+        rSMaterialButtonRectangle2.setText("fingresare");
+        pempleado.add(rSMaterialButtonRectangle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 290, 60));
 
         rsminimenu.add(pempleado, "card3");
 
@@ -442,6 +467,16 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
 
         rsmenu.add(pingresarE, "card2");
 
+        pverEmpleado.setBackground(new java.awt.Color(255, 255, 255));
+        pverEmpleado.setName("pverEmpleado"); // NOI18N
+        pverEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        rSMaterialButtonRectangle30.setBackground(new java.awt.Color(186, 240, 255));
+        rSMaterialButtonRectangle30.setEnabled(false);
+        pverEmpleado.add(rSMaterialButtonRectangle30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 970, 510));
+
+        rsmenu.add(pverEmpleado, "card4");
+
         ventana.add(rsmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 750));
 
         getContentPane().add(ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 1010, 750));
@@ -466,27 +501,12 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void cmbtipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbtipoItemStateChanged
-        String tipo = cmbtipo.getSelectedItem().toString();
-        if(tipo.equals("Centro de Salud"))
-        {
-            cmbclasificacion.setEnabled(true);
-            cmblugar.setEnabled(false);
-            cmblugar.setText("");
-        }
-        else if(tipo.equals("Puesto de Salud"))
-        {
-            cmblugar.setEnabled(true);
-            cmbclasificacion.setEnabled(false);
-            cmbclasificacion.setSelectedIndex(0);
-        }
-        else
-        {
-            cmblugar.setEnabled(false);
-            cmbclasificacion.setEnabled(false);
-            cmblugar.setText("");
-            cmbclasificacion.setSelectedIndex(0);
-        }
+
     }//GEN-LAST:event_cmbtipoItemStateChanged
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        rsmenu.setPanelSlider((int)1.2,pverEmpleado, RSPanelsSlider.DIRECT.LEFT);
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -505,20 +525,21 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new principal().setVisible(true);
             }
         });
     }
@@ -533,6 +554,7 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
@@ -559,10 +581,12 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
     private javax.swing.JPanel pminimenu;
     private javax.swing.JPanel principal;
     private javax.swing.JPanel pvacio;
+    private javax.swing.JPanel pverEmpleado;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle17;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle18;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle19;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle20;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle21;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle22;
@@ -573,6 +597,7 @@ String ruta2 = "\\src\\Imagenes\\blanco.jpg";
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle27;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle28;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle29;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle30;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle5;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle6;
     private rojerusan.RSPanelsSlider rsmenu;
