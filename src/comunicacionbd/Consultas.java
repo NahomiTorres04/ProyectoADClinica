@@ -5,10 +5,28 @@
  */
 package comunicacionbd;
 
+import java.sql.Connection;
+
 /**
  *
  * @author Nahomi
  */
-public class Consultas {
+public class Consultas
+{
+    private Connection con = null;
+    private Conexion conexion = Conexion.getInstancia();
+    private static Consultas consultas = null;
     
+    private Consultas()
+    {
+        con = conexion.getConnection();
+    }
+    public static Consultas getInstancia()
+    {
+        if(consultas == null)
+        {
+            consultas = new Consultas();
+        }
+        return consultas;
+    }
 }

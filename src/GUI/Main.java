@@ -5,11 +5,13 @@
  */
 package GUI;
 
+import adminRRHH.Usuario;
+
 /**
  *
  * @author Nahomi
  */
 public class Main 
 {
-    private Ususario usuario;
+    private Usuario usuario;
 }
