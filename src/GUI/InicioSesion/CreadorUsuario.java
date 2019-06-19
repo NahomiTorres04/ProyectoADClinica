@@ -3,13 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package GUI.InicioSesion;
 
 /**
  *
  * @author Nahomi
  */
-public class Main 
+public class CreadorUsuario 
 {
-
+    private FabricaUsuario fabrica;
+    private Usuario persona;
+    
+    public void crear(int tipo)
+    {
+        
+    }
 }

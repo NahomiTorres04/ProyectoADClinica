@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package GUI.InicioSesion;
 
 import com.sun.awt.AWTUtilities;
 import java.awt.Color;
@@ -90,7 +90,6 @@ public class login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1252, 750));
 
         jPanel1.setBackground(new java.awt.Color(0, 52, 102));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
