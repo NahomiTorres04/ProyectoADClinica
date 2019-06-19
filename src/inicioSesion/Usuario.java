@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.InicioSesion;
+package inicioSesion;
 
 /**
  *
  * @author Nahomi
  */
-public abstract class Usuario 
+public abstract class Usuario implements FabricaUsuario, Permisos
 {
-    private String nombre, usuario, contrasenia;
+    private String nombre, usuario, contraseña;
     public static final int ADMIN = 1, EMPLEADO = 2, BODEGUERO = 3, VISITANTE = 4;
 
     public String getNombre() 
@@ -36,12 +36,12 @@ public abstract class Usuario
 
     public String getContrasenia() 
     {
-        return contrasenia;
+        return contraseña;
     }
 
-    public void setContrasenia(String contrasenia) 
+    public void setContraseña(String contraseña) 
     {
-        this.contrasenia = contrasenia;
+        this.contraseña = contraseña;
     }
 
 }

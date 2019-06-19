@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.InicioSesion;
+package inicioSesion;
 
 /**
  *
  * @author Nahomi
  */
-public interface Permisos 
+public interface FabricaUsuario 
 {
-    public void activarPermisos();
+    public Usuario crearUsuario(String nombre, String usuario, String contraseña);
 }

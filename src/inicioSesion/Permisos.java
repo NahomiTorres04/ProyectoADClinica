@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.InicioSesion;
+package inicioSesion;
 
 /**
  *
  * @author Nahomi
  */
-public class Bodeguero extends Usuario
+public interface Permisos 
 {
-    
+    public void activarPermisos();
 }
