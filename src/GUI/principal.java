@@ -144,20 +144,20 @@ String ruta2 = "/src/imagenes/blanco.jpg";
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jcMousePanel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo-24131_960_720.png"))); // NOI18N
+        jcMousePanel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo1.png"))); // NOI18N
 
         javax.swing.GroupLayout jcMousePanel1Layout = new javax.swing.GroupLayout(jcMousePanel1);
         jcMousePanel1.setLayout(jcMousePanel1Layout);
         jcMousePanel1Layout.setHorizontalGroup(
             jcMousePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
         jcMousePanel1Layout.setVerticalGroup(
             jcMousePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jcMousePanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 240, 240));
+        getContentPane().add(jcMousePanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, -15, 280, 280));
 
         botones.setBackground(new java.awt.Color(204, 204, 255));
         botones.setOpaque(false);
