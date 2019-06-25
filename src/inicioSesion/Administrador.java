@@ -5,6 +5,9 @@
  */
 package inicioSesion;
 
+import GUI.Main;
+import GUI.Principal;
+
 /**
  *
  * @author Nahomi
@@ -21,7 +24,13 @@ public class Administrador extends Usuario
     }    
 
     @Override
-    public void activarPermisos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void activarPermisos()
+    {
+        Principal principal = Principal.getInstancia();
+        principal.btnusuarios.setVisible(true);
+        principal.btnmenuempleado.setVisible(true);
+        principal.btnmenuinventario.setVisible(true);
+        principal.btnfinanciero.setVisible(true);
+        Main.entrar();
     }
 }

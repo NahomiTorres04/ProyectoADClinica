@@ -10,8 +10,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 import java.io.File;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import rojerusan.RSPanelsSlider;
 import rojerusan.RSTableMetro;
@@ -20,18 +22,29 @@ import rojerusan.RSTableMetro;
  *
  * @author Nahomi
  */
-public class principal extends javax.swing.JFrame {
-String ruta1 = "/src/imagenes/f3.jpg";
-String ruta2 = "/src/imagenes/blanco.jpg";
+public class Principal extends javax.swing.JFrame {
+    String ruta1 = System.getProperty("file.separator") + "src" +
+        System.getProperty("file.separator") + "imagenes" +
+        System.getProperty("file.separator") + "f3.jpg";
+    String ruta2 = System.getProperty("file.separator") + "src" +
+        System.getProperty("file.separator") + "imagenes" +
+        System.getProperty("file.separator") + "blanco.jpg";
+    private static Principal interfazPrincipal = null;
     /**
      * Creates new form Principal
      */
-    public principal() {
+    public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this,false); //hacemos el frame transparente
         transparencia(ruta1, 400,1000, 0.55f, minimenu);
         transparencia(ruta2, 100, 1000, 0.55f, lbbotones);
+    }
+    
+    public static Principal getInstancia()
+    {
+        if(interfazPrincipal == null) interfazPrincipal = new Principal();
+        return interfazPrincipal;
     }
     private void transparencia(String ruta, int tamhorizontal, int tamvertical, float valor, JLabel label)
     {
@@ -52,7 +65,7 @@ String ruta2 = "/src/imagenes/blanco.jpg";
             e.printStackTrace();
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -145,6 +158,7 @@ String ruta2 = "/src/imagenes/blanco.jpg";
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jcMousePanel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logol.png"))); // NOI18N
+        jcMousePanel1.setVisibleLogo(false);
 
         javax.swing.GroupLayout jcMousePanel1Layout = new javax.swing.GroupLayout(jcMousePanel1);
         jcMousePanel1.setLayout(jcMousePanel1Layout);
@@ -218,15 +232,15 @@ String ruta2 = "/src/imagenes/blanco.jpg";
 
         lbfinanzas.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         lbfinanzas.setText("  Finanzas  ");
-        botones.add(lbfinanzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 70, -1));
+        botones.add(lbfinanzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 90, -1));
 
         lbempleados2.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         lbempleados2.setText("  Inventario");
-        botones.add(lbempleados2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 70, -1));
+        botones.add(lbempleados2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 90, -1));
 
         lbempleados.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         lbempleados.setText("  Empleados");
-        botones.add(lbempleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 70, -1));
+        botones.add(lbempleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 90, -1));
 
         lbbotones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -638,47 +652,49 @@ String ruta2 = "/src/imagenes/blanco.jpg";
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new principal().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Principal().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botones;
-    private javax.swing.JButton btnfinanciero;
-    private javax.swing.JButton btnmenuempleado;
-    private javax.swing.JButton btnmenuinventario;
+    public javax.swing.JButton btnfinanciero;
+    public javax.swing.JButton btnmenuempleado;
+    public javax.swing.JButton btnmenuinventario;
     private javax.swing.JButton btnnuevoarticulo;
     private javax.swing.JButton btnnuevoempleado;
-    private javax.swing.JButton btnusuarios;
+    public javax.swing.JButton btnusuarios;
     private javax.swing.JButton btnverempleados;
     private javax.swing.JButton btnverinventario;
     private javax.swing.JComboBox<String> cmbclasificacion;

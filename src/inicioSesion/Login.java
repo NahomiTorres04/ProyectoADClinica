@@ -16,6 +16,7 @@ import rojerusan.RSPanelsSlider;
 public class Login extends javax.swing.JFrame {
 
     FabricaUsuario fabrica;
+    private static Login login = null;
     /**
      * Creates new form login
      */
@@ -25,6 +26,12 @@ public class Login extends javax.swing.JFrame {
         AWTUtilities.setWindowOpaque(this, false);
         jPanel2.setBackground(new Color(0,0,0,0));
         cmbusuario.setBackground(new Color(0,0,0,0));
+    }
+    
+    public static Login getInstancia()
+    {
+        if(login == null) login = new Login();
+        return login;
     }
 
     /**
@@ -502,8 +509,8 @@ public class Login extends javax.swing.JFrame {
         
         CreadorUsuario creador = new CreadorUsuario(fabrica);
         Usuario usuario = creador.crear(Usuario.ADMIN);
-        
-        
+        usuario.activarPermisos();
+        this.dispose();
     }//GEN-LAST:event_lbIngresarMouseClicked
 
     private void lbIngresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbIngresarKeyPressed

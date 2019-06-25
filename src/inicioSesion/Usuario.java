@@ -5,11 +5,13 @@
  */
 package inicioSesion;
 
+import GUI.Principal;
+
 /**
  *
  * @author Nahomi
  */
-public abstract class Usuario implements FabricaUsuario, Permisos
+public abstract class Usuario implements FabricaUsuario
 {
     private String nombre, usuario, contraseña;
     public static final int ADMIN = 1, EMPLEADO = 2, BODEGUERO = 3, VISITANTE = 4;
@@ -43,5 +45,7 @@ public abstract class Usuario implements FabricaUsuario, Permisos
     {
         this.contraseña = contraseña;
     }
-
+    
+    public void activarPermisos()
+    {}
 }
