@@ -18,7 +18,6 @@ public class Main
         Login login = Login.getInstancia();
         login.setVisible(true);
     }
-    
     public static void entrar()
     {
         Principal principal = Principal.getInstancia();
