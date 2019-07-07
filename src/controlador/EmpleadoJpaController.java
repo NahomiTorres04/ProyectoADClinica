@@ -41,7 +41,7 @@ public class EmpleadoJpaController implements Serializable {
     private EmpleadoJpaController()
     {}
     
-    public EmpleadoJpaController getInstancia()
+    public static EmpleadoJpaController getInstancia()
     {
         if(controladorEmpleado == null) controladorEmpleado = new EmpleadoJpaController();
         return controladorEmpleado;

@@ -40,7 +40,7 @@ public class PacienteJpaController implements Serializable {
     private PacienteJpaController()
     {}
     
-    public PacienteJpaController getInstancia()
+    public static PacienteJpaController getInstancia()
     {
         if(controladorPaciente == null) controladorPaciente = new PacienteJpaController();
         return controladorPaciente;

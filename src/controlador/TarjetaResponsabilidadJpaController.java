@@ -41,7 +41,7 @@ public class TarjetaResponsabilidadJpaController implements Serializable {
     private TarjetaResponsabilidadJpaController()
     {}
     
-    public TarjetaResponsabilidadJpaController getInstancia()
+    public static TarjetaResponsabilidadJpaController getInstancia()
     {
         if(controladorTarjeta == null) controladorTarjeta = new TarjetaResponsabilidadJpaController();
         return controladorTarjeta;

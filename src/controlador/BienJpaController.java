@@ -40,7 +40,7 @@ public class BienJpaController implements Serializable {
     private BienJpaController()
     {}
     
-    public BienJpaController getInstancia()
+    public static BienJpaController getInstancia()
     {
         if(controladorBien == null) controladorBien = new BienJpaController();
         return controladorBien;

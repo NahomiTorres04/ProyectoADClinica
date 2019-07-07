@@ -37,7 +37,7 @@ public class EstadoDeResultadosJpaController implements Serializable {
     private EstadoDeResultadosJpaController()
     {}
     
-    public EstadoDeResultadosJpaController getInstancia()
+    public static EstadoDeResultadosJpaController getInstancia()
     {
         if(controladorEstadoResultados == null) controladorEstadoResultados = new EstadoDeResultadosJpaController();
         return controladorEstadoResultados;

@@ -42,7 +42,7 @@ public class DepartamentoJpaController implements Serializable {
     private DepartamentoJpaController()
     {}
     
-    public DepartamentoJpaController getInstancia()
+    public static DepartamentoJpaController getInstancia()
     {
         if(controladorDepartamento == null) controladorDepartamento = new DepartamentoJpaController();
         return controladorDepartamento;

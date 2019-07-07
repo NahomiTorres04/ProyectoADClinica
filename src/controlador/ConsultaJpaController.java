@@ -38,7 +38,7 @@ public class ConsultaJpaController implements Serializable {
     private ConsultaJpaController()
     {}
     
-    public ConsultaJpaController getInstancia()
+    public static ConsultaJpaController getInstancia()
     {
         if(controladorConsulta == null) controladorConsulta = new ConsultaJpaController();
         return controladorConsulta;

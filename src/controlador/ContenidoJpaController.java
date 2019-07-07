@@ -42,7 +42,7 @@ public class ContenidoJpaController implements Serializable {
     private ContenidoJpaController()
     {}
     
-    public ContenidoJpaController getInstancia()
+    public static ContenidoJpaController getInstancia()
     {
         if(controladorContenido == null) controladorContenido = new ContenidoJpaController();
         return controladorContenido;

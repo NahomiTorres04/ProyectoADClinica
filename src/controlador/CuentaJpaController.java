@@ -40,7 +40,7 @@ public class CuentaJpaController implements Serializable {
     private CuentaJpaController()
     {}
     
-    public CuentaJpaController getInstancia()
+    public static CuentaJpaController getInstancia()
     {
         if(controladorCuenta == null) controladorCuenta = new CuentaJpaController();
         return controladorCuenta;
