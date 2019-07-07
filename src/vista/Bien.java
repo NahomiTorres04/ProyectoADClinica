@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package vista;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -212,7 +212,7 @@ public class Bien implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Bien[ id=" + id + " ]";
+        return "vista.Bien[ id=" + id + " ]";
     }
     
 }

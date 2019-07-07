@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package vista;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -162,7 +162,7 @@ public class EstadoDeResultados implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.EstadoDeResultados[ id=" + id + " ]";
+        return "vista.EstadoDeResultados[ id=" + id + " ]";
     }
     
 }

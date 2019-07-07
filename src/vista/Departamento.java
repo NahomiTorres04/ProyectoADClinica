@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package vista;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -121,7 +121,7 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Departamento[ id=" + id + " ]";
+        return "vista.Departamento[ id=" + id + " ]";
     }
     
 }

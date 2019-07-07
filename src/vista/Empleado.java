@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package vista;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -271,7 +271,7 @@ public class Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Empleado[ id=" + id + " ]";
+        return "vista.Empleado[ id=" + id + " ]";
     }
     
 }
