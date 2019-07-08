@@ -107,6 +107,9 @@ public class Principal extends javax.swing.JFrame {
         rSMaterialButtonRectangle3 = new rojerusan.RSMaterialButtonRectangle();
         btnverinventario = new javax.swing.JButton();
         rSMaterialButtonRectangle4 = new rojerusan.RSMaterialButtonRectangle();
+        pFinanzas = new javax.swing.JPanel();
+        btnEstadoR = new javax.swing.JButton();
+        fondoEstadoR = new rojerusan.RSMaterialButtonRectangle();
         minimenu = new javax.swing.JLabel();
         ventana = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -159,10 +162,7 @@ public class Principal extends javax.swing.JFrame {
         fondoprofesion = new rojerusan.RSMaterialButtonRectangle();
         fondolugar = new rojerusan.RSMaterialButtonRectangle();
         fondofechacontratacion = new rojerusan.RSMaterialButtonRectangle();
-        pverEmpleado = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmpleado = new rojerusan.RSTableMetro();
-        rSMaterialButtonRectangle30 = new rojerusan.RSMaterialButtonRectangle();
+        jPanel1 = new javax.swing.JPanel();
         jparticulo = new jcMousePanel.jcMousePanel();
         lblarticulo = new javax.swing.JLabel();
         lblcuenta = new javax.swing.JLabel();
@@ -193,10 +193,18 @@ public class Principal extends javax.swing.JFrame {
         fondoprecio = new rojerusan.RSMaterialButtonRectangle();
         fondoestado = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle7 = new rojerusan.RSMaterialButtonRectangle();
-        jpverInventario = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblEmpleado1 = new rojerusan.RSTableMetro();
-        rSMaterialButtonRectangle40 = new rojerusan.RSMaterialButtonRectangle();
+        jmpEstadoR = new jcMousePanel.jcMousePanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblEstadoResultados = new rojerusan.RSTableMetro();
+        fondoEstadoResultados = new rojerusan.RSMaterialButtonRectangle();
+        jmpVerInventario = new jcMousePanel.jcMousePanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblInventario = new rojerusan.RSTableMetro();
+        fondoVerInventario = new rojerusan.RSMaterialButtonRectangle();
+        jmpVerEmpleado = new jcMousePanel.jcMousePanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblVerEmpleado = new rojerusan.RSTableMetro();
+        fondoVerEmpleado = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -411,6 +419,33 @@ public class Principal extends javax.swing.JFrame {
         pinventario.add(rSMaterialButtonRectangle4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 290, 60));
 
         rsminimenu.add(pinventario, "card3");
+
+        pFinanzas.setName("pFinanzas"); // NOI18N
+        pFinanzas.setOpaque(false);
+        pFinanzas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnEstadoR.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 18)); // NOI18N
+        btnEstadoR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-add-list-45.png"))); // NOI18N
+        btnEstadoR.setText("    Estado de Resultados      ");
+        btnEstadoR.setToolTipText("ingresar nuevo articulo");
+        btnEstadoR.setActionCommand("   Nuevo Empleado   ");
+        btnEstadoR.setBorder(null);
+        btnEstadoR.setBorderPainted(false);
+        btnEstadoR.setContentAreaFilled(false);
+        btnEstadoR.setDefaultCapable(false);
+        btnEstadoR.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-add-list-55.png"))); // NOI18N
+        btnEstadoR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEstadoRMouseClicked(evt);
+            }
+        });
+        pFinanzas.add(btnEstadoR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 185, 270, 50));
+
+        fondoEstadoR.setBackground(new java.awt.Color(255, 255, 255));
+        fondoEstadoR.setText("fingresare");
+        pFinanzas.add(fondoEstadoR, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 290, 60));
+
+        rsminimenu.add(pFinanzas, "card5");
 
         pminimenu.add(rsminimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 750));
         pminimenu.add(minimenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 750));
@@ -641,38 +676,20 @@ public class Principal extends javax.swing.JFrame {
         fondofechacontratacion.setEnabled(false);
         jmpIngresarEmpleado.add(fondofechacontratacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 400, 50));
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jmpIngresarEmpleado.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 590, -1, -1));
+
         rsmenu.add(jmpIngresarEmpleado, "card7");
-
-        pverEmpleado.setBackground(new java.awt.Color(255, 255, 255));
-        pverEmpleado.setName("pverEmpleado"); // NOI18N
-        pverEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tblEmpleado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblEmpleado.setColorBackgoundHead(new java.awt.Color(0, 54, 102));
-        tblEmpleado.setColorBordeFilas(new java.awt.Color(255, 255, 255));
-        tblEmpleado.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
-        tblEmpleado.setColorFilasForeground1(new java.awt.Color(0, 54, 102));
-        tblEmpleado.setColorFilasForeground2(new java.awt.Color(0, 54, 102));
-        tblEmpleado.setColorSelBackgound(new java.awt.Color(0, 54, 102));
-        jScrollPane1.setViewportView(tblEmpleado);
-
-        pverEmpleado.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 930, 470));
-
-        rSMaterialButtonRectangle30.setBackground(new java.awt.Color(186, 240, 255));
-        rSMaterialButtonRectangle30.setEnabled(false);
-        pverEmpleado.add(rSMaterialButtonRectangle30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 970, 510));
-
-        rsmenu.add(pverEmpleado, "card4");
 
         jparticulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fmenu4.png"))); // NOI18N
         jparticulo.setName("jparticulo"); // NOI18N
@@ -798,11 +815,82 @@ public class Principal extends javax.swing.JFrame {
 
         rsmenu.add(jparticulo, "card5");
 
-        jpverInventario.setBackground(new java.awt.Color(255, 255, 255));
-        jpverInventario.setName("jpverInventario"); // NOI18N
-        jpverInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jmpEstadoR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fmenu4.png"))); // NOI18N
+        jmpEstadoR.setName("jmpEstadoR"); // NOI18N
+        jmpEstadoR.setVisibleLogo(false);
+        jmpEstadoR.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tblEmpleado1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEstadoResultados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Cantidad", "Descrpción", "Debe", "Haber", "Código"
+            }
+        ));
+        tblEstadoResultados.setColorBackgoundHead(new java.awt.Color(0, 54, 102));
+        tblEstadoResultados.setColorBordeFilas(new java.awt.Color(255, 255, 255));
+        tblEstadoResultados.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        tblEstadoResultados.setColorFilasForeground1(new java.awt.Color(0, 54, 102));
+        tblEstadoResultados.setColorFilasForeground2(new java.awt.Color(0, 54, 102));
+        tblEstadoResultados.setColorSelBackgound(new java.awt.Color(0, 54, 102));
+        jScrollPane3.setViewportView(tblEstadoResultados);
+        if (tblEstadoResultados.getColumnModel().getColumnCount() > 0) {
+            tblEstadoResultados.getColumnModel().getColumn(4).setHeaderValue("Código");
+        }
+
+        jmpEstadoR.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 930, 470));
+
+        fondoEstadoResultados.setBackground(new java.awt.Color(186, 240, 255));
+        fondoEstadoResultados.setEnabled(false);
+        jmpEstadoR.add(fondoEstadoResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 970, 510));
+
+        rsmenu.add(jmpEstadoR, "card7");
+
+        jmpVerInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fmenu4.png"))); // NOI18N
+        jmpVerInventario.setName("jmpVerInventario"); // NOI18N
+        jmpVerInventario.setVisibleLogo(false);
+        jmpVerInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblInventario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Código", "Descrpción", "Cantidad", "Precio Unitario", "Estado", "Fungible", "Total"
+            }
+        ));
+        tblInventario.setColorBackgoundHead(new java.awt.Color(0, 54, 102));
+        tblInventario.setColorBordeFilas(new java.awt.Color(255, 255, 255));
+        tblInventario.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        tblInventario.setColorFilasForeground1(new java.awt.Color(0, 54, 102));
+        tblInventario.setColorFilasForeground2(new java.awt.Color(0, 54, 102));
+        tblInventario.setColorSelBackgound(new java.awt.Color(0, 54, 102));
+        jScrollPane4.setViewportView(tblInventario);
+        if (tblInventario.getColumnModel().getColumnCount() > 0) {
+            tblInventario.getColumnModel().getColumn(4).setHeaderValue("Código");
+        }
+
+        jmpVerInventario.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 930, 470));
+
+        fondoVerInventario.setBackground(new java.awt.Color(186, 240, 255));
+        fondoVerInventario.setEnabled(false);
+        jmpVerInventario.add(fondoVerInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 970, 510));
+
+        rsmenu.add(jmpVerInventario, "card7");
+
+        jmpVerEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fmenu4.png"))); // NOI18N
+        jmpVerEmpleado.setName("jmpVerEmpleado"); // NOI18N
+        jmpVerEmpleado.setVisibleLogo(false);
+        jmpVerEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblVerEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -810,24 +898,24 @@ public class Principal extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Apellido", "Lugar", "Profesión"
             }
         ));
-        tblEmpleado1.setColorBackgoundHead(new java.awt.Color(0, 54, 102));
-        tblEmpleado1.setColorBordeFilas(new java.awt.Color(255, 255, 255));
-        tblEmpleado1.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
-        tblEmpleado1.setColorFilasForeground1(new java.awt.Color(0, 54, 102));
-        tblEmpleado1.setColorFilasForeground2(new java.awt.Color(0, 54, 102));
-        tblEmpleado1.setColorSelBackgound(new java.awt.Color(0, 54, 102));
-        jScrollPane2.setViewportView(tblEmpleado1);
+        tblVerEmpleado.setColorBackgoundHead(new java.awt.Color(0, 54, 102));
+        tblVerEmpleado.setColorBordeFilas(new java.awt.Color(255, 255, 255));
+        tblVerEmpleado.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        tblVerEmpleado.setColorFilasForeground1(new java.awt.Color(0, 54, 102));
+        tblVerEmpleado.setColorFilasForeground2(new java.awt.Color(0, 54, 102));
+        tblVerEmpleado.setColorSelBackgound(new java.awt.Color(0, 54, 102));
+        jScrollPane5.setViewportView(tblVerEmpleado);
 
-        jpverInventario.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 930, 470));
+        jmpVerEmpleado.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 930, 470));
 
-        rSMaterialButtonRectangle40.setBackground(new java.awt.Color(186, 240, 255));
-        rSMaterialButtonRectangle40.setEnabled(false);
-        jpverInventario.add(rSMaterialButtonRectangle40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 970, 510));
+        fondoVerEmpleado.setBackground(new java.awt.Color(186, 240, 255));
+        fondoVerEmpleado.setEnabled(false);
+        jmpVerEmpleado.add(fondoVerEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 970, 510));
 
-        rsmenu.add(jpverInventario, "card4");
+        rsmenu.add(jmpVerEmpleado, "card7");
 
         ventana.add(rsmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 750));
 
@@ -857,7 +945,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbtipoItemStateChanged
 
     private void btnverempleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnverempleadosMouseClicked
-        rsmenu.setPanelSlider((int)1.2,pverEmpleado, RSPanelsSlider.DIRECT.LEFT);
+        rsmenu.setPanelSlider((int)1.2,jmpVerEmpleado, RSPanelsSlider.DIRECT.LEFT);
     }//GEN-LAST:event_btnverempleadosMouseClicked
 
     private void btnmenuinventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmenuinventarioMouseClicked
@@ -869,11 +957,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnnuevoarticuloMouseClicked
 
     private void btnverinventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnverinventarioMouseClicked
-        rsmenu.setPanelSlider((int)1.2,jpverInventario, RSPanelsSlider.DIRECT.LEFT);
+        rsmenu.setPanelSlider((int)1.2,jmpVerInventario, RSPanelsSlider.DIRECT.LEFT);
     }//GEN-LAST:event_btnverinventarioMouseClicked
 
     private void btnfinancieroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfinancieroMouseClicked
-        // TODO add your handling code here:
+        rsminimenu.setPanelSlider((int)1.2,pFinanzas, RSPanelsSlider.DIRECT.UP);
     }//GEN-LAST:event_btnfinancieroMouseClicked
 
     private void btnusuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnusuariosMouseClicked
@@ -883,6 +971,10 @@ public class Principal extends javax.swing.JFrame {
     private void fondofechadesersionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fondofechadesersionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fondofechadesersionActionPerformed
+
+    private void btnEstadoRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstadoRMouseClicked
+        rsmenu.setPanelSlider((int)1.2,jmpEstadoR, RSPanelsSlider.DIRECT.LEFT);
+    }//GEN-LAST:event_btnEstadoRMouseClicked
 
     /**
      * @param args the command line arguments
@@ -924,6 +1016,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botones;
+    private javax.swing.JButton btnEstadoR;
     public javax.swing.JButton btnfinanciero;
     private javax.swing.JLabel btnguardar;
     public javax.swing.JButton btnmenuempleado;
@@ -945,8 +1038,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbtipo;
     private rojerusan.RSMaterialButtonRectangle fondoDepartamento;
     private rojerusan.RSMaterialButtonRectangle fondoDpi;
+    private rojerusan.RSMaterialButtonRectangle fondoEstadoR;
+    private rojerusan.RSMaterialButtonRectangle fondoEstadoResultados;
     private rojerusan.RSMaterialButtonRectangle fondoMunicipio;
     private rojerusan.RSMaterialButtonRectangle fondoTipo;
+    private rojerusan.RSMaterialButtonRectangle fondoVerEmpleado;
+    private rojerusan.RSMaterialButtonRectangle fondoVerInventario;
     private rojerusan.RSMaterialButtonRectangle fondoapellido;
     private rojerusan.RSMaterialButtonRectangle fondocantidad;
     private rojerusan.RSMaterialButtonRectangle fondocargo;
@@ -968,12 +1065,16 @@ public class Principal extends javax.swing.JFrame {
     private rojerusan.RSMaterialButtonRectangle fondosueldo;
     private rojerusan.RSMaterialButtonRectangle fondotelemergencia;
     private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private jcMousePanel.jcMousePanel jcMousePanel1;
+    private jcMousePanel.jcMousePanel jmpEstadoR;
     private jcMousePanel.jcMousePanel jmpIngresarEmpleado;
+    private jcMousePanel.jcMousePanel jmpVerEmpleado;
+    private jcMousePanel.jcMousePanel jmpVerInventario;
     private jcMousePanel.jcMousePanel jparticulo;
-    private javax.swing.JPanel jpverInventario;
     private javax.swing.JLabel lbempleados;
     private javax.swing.JLabel lbempleados1;
     private javax.swing.JLabel lbempleados2;
@@ -1005,25 +1106,24 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lblsueldo;
     private javax.swing.JLabel lbltipo;
     private javax.swing.JLabel minimenu;
+    private javax.swing.JPanel pFinanzas;
     private javax.swing.JPanel pempleado;
     private javax.swing.JPanel pinventario;
     private javax.swing.JPanel pminimenu;
     private javax.swing.JPanel principal;
     private javax.swing.JPanel pvacio;
-    private javax.swing.JPanel pverEmpleado;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle30;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle4;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle40;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle7;
     private javax.swing.JRadioButton rbtnOtroClasificacion;
     private javax.swing.JRadioButton rbtnOtroTipo;
     private rojerusan.RSPanelsSlider rsmenu;
     private rojerusan.RSPanelsSlider rsminimenu;
-    private rojerusan.RSTableMetro tblEmpleado;
-    private rojerusan.RSTableMetro tblEmpleado1;
+    private rojerusan.RSTableMetro tblEstadoResultados;
+    private rojerusan.RSTableMetro tblInventario;
+    private rojerusan.RSTableMetro tblVerEmpleado;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextArea txtDes;
