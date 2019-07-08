@@ -9,10 +9,8 @@ import controlador.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import vista.Bien;
@@ -29,21 +27,10 @@ public class BienJpaController implements Serializable {
     public BienJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProyectoAD");
-    private EntityManager em = emf.createEntityManager();
-    private static BienJpaController controladorBien = null;
+    private EntityManager em;
 
     public EntityManager getEntityManager() {
         return this.em;
-    }
-    
-    private BienJpaController()
-    {}
-    
-    public static BienJpaController getInstancia()
-    {
-        if(controladorBien == null) controladorBien = new BienJpaController();
-        return controladorBien;
     }
 
     public void create(Bien bien) {

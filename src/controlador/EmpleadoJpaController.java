@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import vista.Empleado;
 
 /**
@@ -30,21 +28,10 @@ public class EmpleadoJpaController implements Serializable {
     public EmpleadoJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProyectoAD");
-    private EntityManager em = emf.createEntityManager();
-    private static EmpleadoJpaController controladorEmpleado = null;
+    private EntityManager em;
 
     public EntityManager getEntityManager() {
         return this.em;
-    }
-
-    private EmpleadoJpaController()
-    {}
-    
-    public static EmpleadoJpaController getInstancia()
-    {
-        if(controladorEmpleado == null) controladorEmpleado = new EmpleadoJpaController();
-        return controladorEmpleado;
     }
 
     public void create(Empleado empleado) {

@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import vista.Cuenta;
 
 /**
@@ -29,21 +27,10 @@ public class CuentaJpaController implements Serializable {
     public CuentaJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProyectoAD");
-    private EntityManager em = emf.createEntityManager();
-    private static CuentaJpaController controladorCuenta = null;
+    private EntityManager em;
 
     public EntityManager getEntityManager() {
         return this.em;
-    }
-
-    private CuentaJpaController()
-    {}
-    
-    public static CuentaJpaController getInstancia()
-    {
-        if(controladorCuenta == null) controladorCuenta = new CuentaJpaController();
-        return controladorCuenta;
     }
 
     public void create(Cuenta cuenta) {

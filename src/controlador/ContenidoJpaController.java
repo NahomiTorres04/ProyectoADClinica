@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import vista.Contenido;
 
 /**
@@ -31,21 +29,10 @@ public class ContenidoJpaController implements Serializable {
     public ContenidoJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProyectoAD");
-    private EntityManager em = emf.createEntityManager();
-    private static ContenidoJpaController controladorContenido = null;
+    private EntityManager em;
 
     public EntityManager getEntityManager() {
         return this.em;
-    }
-    
-    private ContenidoJpaController()
-    {}
-    
-    public static ContenidoJpaController getInstancia()
-    {
-        if(controladorContenido == null) controladorContenido = new ContenidoJpaController();
-        return controladorContenido;
     }
 
     public void create(Contenido contenido) {

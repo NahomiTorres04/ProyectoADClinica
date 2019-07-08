@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import vista.Paciente;
 
 /**
@@ -29,21 +27,10 @@ public class PacienteJpaController implements Serializable {
     public PacienteJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProyectoAD");
-    private EntityManager em = emf.createEntityManager();
-    private static PacienteJpaController controladorPaciente = null;
+    private EntityManager em;
 
     public EntityManager getEntityManager() {
         return this.em;
-    }
-
-    private PacienteJpaController()
-    {}
-    
-    public static PacienteJpaController getInstancia()
-    {
-        if(controladorPaciente == null) controladorPaciente = new PacienteJpaController();
-        return controladorPaciente;
     }
 
     public void create(Paciente paciente) {
