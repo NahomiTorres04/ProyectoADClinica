@@ -9,10 +9,8 @@ import controlador.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import vista.Consulta;
@@ -27,21 +25,10 @@ public class ConsultaJpaController implements Serializable {
     public ConsultaJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProyectoBD");
-    private EntityManager em = emf.createEntityManager();
-    private static ConsultaJpaController controladorConsulta = null;
+    private EntityManager em;
     
     public EntityManager getEntityManager() {
         return this.em;
-    }
-    
-    private ConsultaJpaController()
-    {}
-    
-    public static ConsultaJpaController getInstancia()
-    {
-        if(controladorConsulta == null) controladorConsulta = new ConsultaJpaController();
-        return controladorConsulta;
     }
 
     public void create(Consulta consulta) {

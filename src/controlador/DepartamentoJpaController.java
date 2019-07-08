@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import vista.Bien;
 import vista.Departamento;
 
@@ -31,21 +29,10 @@ public class DepartamentoJpaController implements Serializable {
     public DepartamentoJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProyectoAD");
-    private EntityManager em = emf.createEntityManager();
-    private static DepartamentoJpaController controladorDepartamento = null;
+    private EntityManager em;
 
     public EntityManager getEntityManager() {
         return this.em;
-    }
-
-    private DepartamentoJpaController()
-    {}
-    
-    public static DepartamentoJpaController getInstancia()
-    {
-        if(controladorDepartamento == null) controladorDepartamento = new DepartamentoJpaController();
-        return controladorDepartamento;
     }
 
     public void create(Departamento departamento) {

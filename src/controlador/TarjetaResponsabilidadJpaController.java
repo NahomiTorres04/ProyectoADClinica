@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import vista.TarjetaResponsabilidad;
 
 /**
@@ -30,21 +28,10 @@ public class TarjetaResponsabilidadJpaController implements Serializable {
     public TarjetaResponsabilidadJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProyectoAD");
-    private EntityManager em = emf.createEntityManager();
-    private static TarjetaResponsabilidadJpaController controladorTarjeta = null;
+    private EntityManager em;
 
     public EntityManager getEntityManager() {
         return this.em;
-    }
-
-    private TarjetaResponsabilidadJpaController()
-    {}
-    
-    public static TarjetaResponsabilidadJpaController getInstancia()
-    {
-        if(controladorTarjeta == null) controladorTarjeta = new TarjetaResponsabilidadJpaController();
-        return controladorTarjeta;
     }
 
     public void create(TarjetaResponsabilidad tarjetaResponsabilidad) {

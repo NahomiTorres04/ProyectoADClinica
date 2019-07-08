@@ -9,10 +9,8 @@ import controlador.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import vista.EstadoDeResultados;
@@ -26,21 +24,10 @@ public class EstadoDeResultadosJpaController implements Serializable {
     public EstadoDeResultadosJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProyectoAD");
-    private EntityManager em = emf.createEntityManager();
-    private static EstadoDeResultadosJpaController controladorEstadoResultados = null;
+    private EntityManager em;
 
     public EntityManager getEntityManager() {
         return this.em;
-    }
-
-    private EstadoDeResultadosJpaController()
-    {}
-    
-    public static EstadoDeResultadosJpaController getInstancia()
-    {
-        if(controladorEstadoResultados == null) controladorEstadoResultados = new EstadoDeResultadosJpaController();
-        return controladorEstadoResultados;
     }
 
     public void create(EstadoDeResultados estadoDeResultados) {

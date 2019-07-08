@@ -26,21 +26,10 @@ public class UsuarioJpaController implements Serializable {
     public UsuarioJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProyectoAD");
-    private EntityManager em = emf.createEntityManager();
-    private static UsuarioJpaController controladorUsuario = null;
+    private EntityManager em;
 
     public EntityManager getEntityManager() {
         return this.em;
-    }
-
-    private UsuarioJpaController()
-    {}
-    
-    public static UsuarioJpaController getInstancia()
-    {
-        if(controladorUsuario == null) controladorUsuario = new UsuarioJpaController();
-        return controladorUsuario;
     }
 
     public void create(Usuario usuario) {
