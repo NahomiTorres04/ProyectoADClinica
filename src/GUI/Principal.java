@@ -162,7 +162,6 @@ public class Principal extends javax.swing.JFrame {
         fondoprofesion = new rojerusan.RSMaterialButtonRectangle();
         fondolugar = new rojerusan.RSMaterialButtonRectangle();
         fondofechacontratacion = new rojerusan.RSMaterialButtonRectangle();
-        jPanel1 = new javax.swing.JPanel();
         jparticulo = new jcMousePanel.jcMousePanel();
         lblarticulo = new javax.swing.JLabel();
         lblcuenta = new javax.swing.JLabel();
@@ -676,19 +675,6 @@ public class Principal extends javax.swing.JFrame {
         fondofechacontratacion.setEnabled(false);
         jmpIngresarEmpleado.add(fondofechacontratacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 400, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jmpIngresarEmpleado.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 590, -1, -1));
-
         rsmenu.add(jmpIngresarEmpleado, "card7");
 
         jparticulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fmenu4.png"))); // NOI18N
@@ -811,6 +797,11 @@ public class Principal extends javax.swing.JFrame {
 
         rSMaterialButtonRectangle7.setBackground(new java.awt.Color(0, 54, 102));
         rSMaterialButtonRectangle7.setText("Guardar");
+        rSMaterialButtonRectangle7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rSMaterialButtonRectangle7MouseClicked(evt);
+            }
+        });
         jparticulo.add(rSMaterialButtonRectangle7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 550, -1, -1));
 
         rsmenu.add(jparticulo, "card5");
@@ -976,6 +967,12 @@ public class Principal extends javax.swing.JFrame {
         rsmenu.setPanelSlider((int)1.2,jmpEstadoR, RSPanelsSlider.DIRECT.LEFT);
     }//GEN-LAST:event_btnEstadoRMouseClicked
 
+    private void rSMaterialButtonRectangle7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle7MouseClicked
+        /**se ordenaran los datos del formulario para ingresarlos a la base de datos
+         * 
+         */
+    }//GEN-LAST:event_rSMaterialButtonRectangle7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1065,7 +1062,6 @@ public class Principal extends javax.swing.JFrame {
     private rojerusan.RSMaterialButtonRectangle fondosueldo;
     private rojerusan.RSMaterialButtonRectangle fondotelemergencia;
     private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
