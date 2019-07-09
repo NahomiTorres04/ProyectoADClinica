@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Alex de León Véliz <alexdlveliz@hotmail.com>
+ * @author nahomi
  */
 @Entity
 @Table(name = "estado_de_resultados")

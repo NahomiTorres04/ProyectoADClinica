@@ -205,7 +205,7 @@ public class Login extends javax.swing.JFrame {
 
         cmbusuario.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         cmbusuario.setForeground(new java.awt.Color(0, 52, 102));
-        cmbusuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        cmbusuario.setBorder(null);
         jpingresar.add(cmbusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 320, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login2.png"))); // NOI18N
