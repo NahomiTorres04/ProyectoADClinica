@@ -28,7 +28,7 @@ public class Empleado extends Usuario
         Principal principal = Principal.getInstancia();
         principal.btnusuarios.setVisible(false);
         principal.btnmenuempleado.setVisible(false);
-        principal.btnmenuinventario.setVisible(false);
+        principal.btnmenuinventario.setVisible(true);
         principal.btnfinanciero.setVisible(false);
         Main.entrar();
     }

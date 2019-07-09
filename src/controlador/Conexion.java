@@ -15,13 +15,12 @@ import javax.persistence.Persistence;
  */
 public class Conexion
 {
-    private EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("ProyectoAD");
-    private EntityManager em;
+    private EntityManagerFactory fabrica;
     private static Conexion conexion = null;
     
     private Conexion()
     {
-        this.em = fabrica.createEntityManager();
+        fabrica = Persistence.createEntityManagerFactory("ProyectoAD");
     }
     
     public static Conexion getInstancia()
@@ -32,6 +31,6 @@ public class Conexion
     
     public EntityManager getEntityManager()
     {
-        return em;
+        return fabrica.createEntityManager();
     }
 }

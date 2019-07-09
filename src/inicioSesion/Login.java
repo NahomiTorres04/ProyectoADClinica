@@ -8,6 +8,18 @@ package inicioSesion;
 import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import rojerusan.RSPanelsSlider;
+import controlador.UsuarioJpaController;
+import controlador.Conexion;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -26,6 +38,13 @@ public class Login extends javax.swing.JFrame {
         AWTUtilities.setWindowOpaque(this, false);
         jPanel2.setBackground(new Color(0,0,0,0));
         cmbusuario.setBackground(new Color(0,0,0,0));
+        UsuarioJpaController usuarioControlador = new UsuarioJpaController(Conexion.getInstancia().getEntityManager());
+        List<vista.Usuario> usuarios = usuarioControlador.findUsuarioEntities();
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cmbusuario.getModel();
+        for(vista.Usuario usuario : usuarios)
+        {
+            model.addElement(usuario.getNombreUsuario());
+        }
     }
     
     public static Login getInstancia()
@@ -180,11 +199,6 @@ public class Login extends javax.swing.JFrame {
         lbIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbIngresarMouseClicked(evt);
-            }
-        });
-        lbIngresar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                lbIngresarKeyPressed(evt);
             }
         });
         jpingresar.add(lbIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 560, 250, 50));
@@ -506,16 +520,14 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_pswconKeyPressed
 
     private void lbIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIngresarMouseClicked
-        
+        String nombreUsuario = cmbusuario.getSelectedItem().toString();
+        UsuarioJpaController usuarioControlador = new UsuarioJpaController(Conexion.getInstancia().getEntityManager());
+        vista.Usuario usuario = usuarioControlador.findUsuario(nombreUsuario);
         CreadorUsuario creador = new CreadorUsuario(fabrica);
-        Usuario usuario = creador.crear(Usuario.ADMIN);
-        usuario.activarPermisos();
+        Usuario usuarioActual = creador.crear(usuario.getTipo());
+        usuarioActual.activarPermisos();
         this.dispose();
     }//GEN-LAST:event_lbIngresarMouseClicked
-
-    private void lbIngresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbIngresarKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbIngresarKeyPressed
 
     private void pswVContraseniaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pswVContraseniaFocusGained
         pswVContrasenia.setText("");
@@ -526,7 +538,56 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_pswContraseniaFocusGained
 
     private void lbRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbRegistrarMouseClicked
-
+        /**
+         * Se solicitará la contraseña del administrador, para poder confirmar
+         * el nuevo ingreso
+         */
+        if(pswContrasenia.getText().equals(pswVContrasenia.getText()))
+        {
+            String[] arreglo = {"empleado", "bodeguero", "visitante"};
+            Object[] objeto = arreglo;
+            String tipo = (String) JOptionPane.showInputDialog(this, "Seleccione el tipo de usuario", "Ingreso", JOptionPane.PLAIN_MESSAGE, null, objeto, null);
+            try
+            {
+                JPanel panel = new JPanel();
+                JLabel label = new JLabel("Ingrese la contraseña del administrador:");
+                JPasswordField campoContraseña = new JPasswordField(45);
+                panel.add(label);
+                panel.add(campoContraseña);
+                String[] opciones = new String[]{"OK", "Cancel"};
+                int opcion = JOptionPane.showOptionDialog(null, panel, "Contraseña",
+                    JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    null, opciones, opciones[1]);
+                if(opcion == JOptionPane.OK_OPTION) //Si se acepta la contraseña del administrador
+                {
+                    String contraseña = campoContraseña.getText();
+                    String contraseñaCifrada = DigestUtils.md5Hex(contraseña);
+                    //al tener la contraseña cifrada, se procede a la comparación
+                    UsuarioJpaController usuarioControlador = new UsuarioJpaController(Conexion.getInstancia().getEntityManager());
+                    vista.Usuario usuario = usuarioControlador.findUsuario(1);
+                    if(contraseñaCifrada.equals(usuario.getPassword())) //si la contraseña es igual
+                    {
+                        //se procede a ingresar el nuevo usuario
+                        //CONSIDERAR PONER ESTO EN UNA CLASE DIFERENTE AL FRAME, RESPETANTO SRP
+                        vista.Usuario usuarioIngresado = new vista.Usuario();
+                        usuarioIngresado.setNombre(txtNombreN.getText());
+                        usuarioIngresado.setApellido(txtApellidoN.getText());
+                        usuarioIngresado.setNombreUsuario(txtUsuarioN.getText());
+                        usuarioIngresado.setPassword(DigestUtils.md5Hex(pswContrasenia.getText()));
+                        if(tipo.equals("empleado")) usuarioIngresado.setTipo(Usuario.EMPLEADO);
+                        if(tipo.equals("bodeguero")) usuarioIngresado.setTipo(Usuario.BODEGUERO);
+                        if(tipo.equals("visitante")) usuarioIngresado.setTipo(Usuario.VISITANTE);
+                        usuarioControlador = new UsuarioJpaController(Conexion.getInstancia().getEntityManager());
+                        usuarioControlador.create(usuarioIngresado);
+                        JOptionPane.showMessageDialog(this, "Usuario Ingresado", "Éxito", JOptionPane.PLAIN_MESSAGE);
+                    }
+                }    
+            } catch(Exception ex)
+            {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else JOptionPane.showMessageDialog(null, "Verifique contraseñas");
     }//GEN-LAST:event_lbRegistrarMouseClicked
 
     private void btnregistrar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnregistrar1MouseClicked
