@@ -5,6 +5,9 @@
  */
 package inicioSesion;
 
+import GUI.Main;
+import GUI.Principal;
+
 /**
  *
  * @author Nahomi
@@ -21,6 +24,11 @@ public class Bodeguero extends Usuario
 
     @Override
     public void activarPermisos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Principal principal = Principal.getInstancia();
+        principal.btnusuarios.setVisible(false);
+        principal.btnmenuempleado.setVisible(false);
+        principal.btnmenuinventario.setVisible(true);
+        principal.btnfinanciero.setVisible(false);
+        Main.entrar();
     }
 }
