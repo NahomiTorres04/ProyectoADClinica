@@ -6,6 +6,10 @@
 package GUI;
 
 import com.sun.awt.AWTUtilities;
+import controlador.BienJpaController;
+import controlador.Conexion;
+import controlador.CuentaJpaController;
+import controlador.DepartamentoJpaController;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -14,12 +18,14 @@ import java.io.File;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 import rojerusan.RSPanelsSlider;
 import rojerusan.RSTableMetro;
+import vista.Departamento;
 
 /**
  *
@@ -47,6 +53,23 @@ public class Principal extends javax.swing.JFrame {
         Color crl = (new Color(255,255, 255));
         compound = BorderFactory.createCompoundBorder(empty, new redondear(crl));
         botones.setBorder(compound);
+        //USAR PROXY POSTERIORMENTE
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cmbDep.getModel();
+        model.removeAllElements();
+        DepartamentoJpaController controladorDepartamento = new DepartamentoJpaController(Conexion.getInstancia().getEntityManager());
+        List<vista.Departamento> arregloDepartamento = controladorDepartamento.findDepartamentoEntities();
+        for(vista.Departamento departamento : arregloDepartamento)
+        {
+            model.addElement(departamento.getDescripcion());
+        }
+        model = (DefaultComboBoxModel) cmbCuenta.getModel();
+        model.removeAllElements();
+        CuentaJpaController controladorCuenta = new CuentaJpaController(Conexion.getInstancia().getEntityManager());
+        List<vista.Cuenta> arregloCuenta = controladorCuenta.findCuentaEntities();
+        for(vista.Cuenta cuenta : arregloCuenta)
+        {
+            model.addElement(cuenta.getNombre());
+        }
     }
     
     public static Principal getInstancia()
@@ -968,9 +991,30 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEstadoRMouseClicked
 
     private void rSMaterialButtonRectangle7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle7MouseClicked
-        /**se ordenaran los datos del formulario para ingresarlos a la base de datos
-         * 
+        /**
+         * se ordenaran los datos del formulario para ingresarlos a la base de datos
          */
+        BienJpaController controladorBien = new BienJpaController(Conexion.getInstancia().getEntityManager());
+        DepartamentoJpaController controladorDepartamento = new DepartamentoJpaController((Conexion.getInstancia().getEntityManager()));
+        CuentaJpaController controladorCuenta = new CuentaJpaController(Conexion.getInstancia().getEntityManager());
+        vista.Bien bien = new vista.Bien();
+        bien.setCodigo(txtCodigo.getText());
+        bien.setDescripcion(txtDes.getText());
+        bien.setDepartamentoId(controladorDepartamento.findeDepartamento(cmbDep.getSelectedItem().toString()));
+        if(cmbDonado.getSelectedIndex() == 0) bien.setDonado((short) 1); //Sí es donado
+        else bien.setDonado((short) 0); //No es donado
+        if(cmbFungible.getSelectedIndex() == 0) bien.setFungible((short) 1);//Sí es fungible
+        else bien.setFungible((short) 0); //No es fungible
+        int cantidad = Integer.parseInt(txtCantidad.getText());
+        double precio = Double.parseDouble(txtPrecio.getText());
+        double precioTotal = cantidad*precio;
+        bien.setCantidad(cantidad);
+        bien.setPrecioUnitario(precio);
+        bien.setPrecioTotal(precioTotal);
+        if(cmbEstado.getSelectedIndex() == 0) bien.setEstado((short) 1); //Está en buen estado
+        else bien.setEstado((short) 0); //Está en mal estado
+        bien.setCuentaId(controladorCuenta.findCuenta(cmbCuenta.getSelectedItem().toString()));
+        controladorBien.create(bien);
     }//GEN-LAST:event_rSMaterialButtonRectangle7MouseClicked
 
     /**

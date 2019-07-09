@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import vista.Cuenta;
 
 /**
@@ -170,6 +171,20 @@ public class CuentaJpaController implements Serializable {
         try {
             return em.find(Cuenta.class, id);
         } finally {
+            em.close();
+        }
+    }
+    
+    public Cuenta findCuenta(String nombre)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            TypedQuery<Cuenta> query = em.createNamedQuery("Cuenta.findByNombre", Cuenta.class);
+            query.setParameter("nombre", nombre);
+            List<Cuenta> arreglo = query.getResultList();
+            return arreglo.remove(0);
+        }finally{
             em.close();
         }
     }

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import vista.Bien;
 import vista.Departamento;
 
@@ -206,6 +207,20 @@ public class DepartamentoJpaController implements Serializable {
 
     public List<Departamento> findDepartamentoEntities() {
         return findDepartamentoEntities(true, -1, -1);
+    }
+    
+    public Departamento findeDepartamento(String descripcion)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+        TypedQuery<Departamento> query = em.createNamedQuery("Departamento.findByDescripcion", Departamento.class);
+        query.setParameter("descripcion", descripcion);
+        List<Departamento> arreglo = query.getResultList();
+        return arreglo.remove(0);
+        }finally{
+            em.close();
+        }
     }
 
     public List<Departamento> findDepartamentoEntities(int maxResults, int firstResult) {
