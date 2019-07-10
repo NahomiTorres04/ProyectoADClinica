@@ -214,5 +214,4 @@ public class Bien implements Serializable {
     public String toString() {
         return "vista.Bien[ id=" + id + " ]";
     }
-    
 }

@@ -1003,15 +1003,12 @@ public class Principal extends javax.swing.JFrame {
         tblInventario.setColorFilasForeground2(new java.awt.Color(0, 54, 102));
         tblInventario.setColorSelBackgound(new java.awt.Color(0, 54, 102));
         jScrollPane4.setViewportView(tblInventario);
-        if (tblInventario.getColumnModel().getColumnCount() > 0) {
-            tblInventario.getColumnModel().getColumn(4).setHeaderValue("Código");
-        }
 
-        jmpVerInventario.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 930, 470));
+        jmpVerInventario.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 930, 570));
 
         fondoVerInventario.setBackground(new java.awt.Color(186, 240, 255));
         fondoVerInventario.setEnabled(false);
-        jmpVerInventario.add(fondoVerInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 970, 510));
+        jmpVerInventario.add(fondoVerInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 970, 610));
 
         lblarticulo2.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 48)); // NOI18N
         lblarticulo2.setForeground(new java.awt.Color(255, 255, 255));
