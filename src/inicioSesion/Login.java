@@ -76,6 +76,8 @@ public class Login extends javax.swing.JFrame {
         pswcon = new javax.swing.JPasswordField();
         lbIngresar = new javax.swing.JLabel();
         cmbusuario = new javax.swing.JComboBox<>();
+        btnminimizar = new javax.swing.JButton();
+        btncerrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jpRegistrar = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -203,11 +205,32 @@ public class Login extends javax.swing.JFrame {
         });
         jpingresar.add(lbIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 560, 250, 50));
 
-        cmbusuario.setBackground(new java.awt.Color(255, 255, 255));
         cmbusuario.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         cmbusuario.setForeground(new java.awt.Color(0, 52, 102));
         cmbusuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jpingresar.add(cmbusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 320, 30));
+
+        btnminimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Chevron_Down_35px.png"))); // NOI18N
+        btnminimizar.setBorderPainted(false);
+        btnminimizar.setContentAreaFilled(false);
+        btnminimizar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Chevron_Down_55px.png"))); // NOI18N
+        btnminimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnminimizarMouseClicked(evt);
+            }
+        });
+        jpingresar.add(btnminimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 70, 57));
+
+        btncerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Cancel_35px_1.png"))); // NOI18N
+        btncerrar.setBorderPainted(false);
+        btncerrar.setContentAreaFilled(false);
+        btncerrar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Cancel_55px_1.png"))); // NOI18N
+        btncerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btncerrarMouseClicked(evt);
+            }
+        });
+        jpingresar.add(btncerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 70, 57));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login2.png"))); // NOI18N
         jpingresar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 450, 680));
@@ -630,6 +653,15 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jPanel2MouseClicked
 
+    private void btnminimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnminimizarMouseClicked
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnminimizarMouseClicked
+
+    private void btncerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btncerrarMouseClicked
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_btncerrarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -670,8 +702,10 @@ public class Login extends javax.swing.JFrame {
     private rojerusan.RSPanelsSlider RSPIngresar;
     private rojerusan.RSPanelsSlider RSPPrincipal;
     private rojerusan.RSPanelsSlider RSPRegistrar;
+    private javax.swing.JButton btncerrar;
     private javax.swing.JButton btningresar1;
     private javax.swing.JButton btningresar2;
+    private javax.swing.JButton btnminimizar;
     private javax.swing.JButton btnregistrar;
     private javax.swing.JButton btnregistrar1;
     private rojerusan.RSMaterialButtonCircle cbtning1;
