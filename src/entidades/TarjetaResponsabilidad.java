@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package entidades;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,20 +20,24 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author nahomi
+ * @author Alex de León Véliz <alexdlveliz@hotmail.com>
  */
 @Entity
-@Table(name = "contenido")
+@Table(name = "tarjeta_responsabilidad")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Contenido.findAll", query = "SELECT c FROM Contenido c"),
-    @NamedQuery(name = "Contenido.findById", query = "SELECT c FROM Contenido c WHERE c.id = :id")})
-public class Contenido implements Serializable {
+    @NamedQuery(name = "TarjetaResponsabilidad.findAll", query = "SELECT t FROM TarjetaResponsabilidad t"),
+    @NamedQuery(name = "TarjetaResponsabilidad.findById", query = "SELECT t FROM TarjetaResponsabilidad t WHERE t.id = :id"),
+    @NamedQuery(name = "TarjetaResponsabilidad.findByFecha", query = "SELECT t FROM TarjetaResponsabilidad t WHERE t.fecha = :fecha"),
+    @NamedQuery(name = "TarjetaResponsabilidad.findByFungible", query = "SELECT t FROM TarjetaResponsabilidad t WHERE t.fungible = :fungible")})
+public class TarjetaResponsabilidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,19 +45,21 @@ public class Contenido implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @JoinColumn(name = "departamento_id", referencedColumnName = "id")
-    @ManyToOne
-    private Departamento departamentoId;
-    @JoinColumn(name = "tarjeta_responsabilidad_id", referencedColumnName = "id")
-    @ManyToOne
-    private TarjetaResponsabilidad tarjetaResponsabilidadId;
-    @OneToMany(mappedBy = "contenidoId")
+    @Column(name = "fecha")
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
+    @Column(name = "fungible")
+    private Short fungible;
+    @OneToMany(mappedBy = "tarjetaResponsabilidadId")
     private Collection<Bien> bienCollection;
+    @JoinColumn(name = "empleado_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Empleado empleadoId;
 
-    public Contenido() {
+    public TarjetaResponsabilidad() {
     }
 
-    public Contenido(Integer id) {
+    public TarjetaResponsabilidad(Integer id) {
         this.id = id;
     }
 
@@ -64,20 +71,20 @@ public class Contenido implements Serializable {
         this.id = id;
     }
 
-    public Departamento getDepartamentoId() {
-        return departamentoId;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setDepartamentoId(Departamento departamentoId) {
-        this.departamentoId = departamentoId;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
-    public TarjetaResponsabilidad getTarjetaResponsabilidadId() {
-        return tarjetaResponsabilidadId;
+    public Short getFungible() {
+        return fungible;
     }
 
-    public void setTarjetaResponsabilidadId(TarjetaResponsabilidad tarjetaResponsabilidadId) {
-        this.tarjetaResponsabilidadId = tarjetaResponsabilidadId;
+    public void setFungible(Short fungible) {
+        this.fungible = fungible;
     }
 
     @XmlTransient
@@ -87,6 +94,14 @@ public class Contenido implements Serializable {
 
     public void setBienCollection(Collection<Bien> bienCollection) {
         this.bienCollection = bienCollection;
+    }
+
+    public Empleado getEmpleadoId() {
+        return empleadoId;
+    }
+
+    public void setEmpleadoId(Empleado empleadoId) {
+        this.empleadoId = empleadoId;
     }
 
     @Override
@@ -99,10 +114,10 @@ public class Contenido implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Contenido)) {
+        if (!(object instanceof TarjetaResponsabilidad)) {
             return false;
         }
-        Contenido other = (Contenido) object;
+        TarjetaResponsabilidad other = (TarjetaResponsabilidad) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -111,7 +126,7 @@ public class Contenido implements Serializable {
 
     @Override
     public String toString() {
-        return "vista.Contenido[ id=" + id + " ]";
+        return "entidades.TarjetaResponsabilidad[ id=" + id + " ]";
     }
     
 }

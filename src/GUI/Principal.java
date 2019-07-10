@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Tarjeta_Responsabilidad.Articulo_Tarjeta;
+import Tarjeta_Responsabilidad.Tarjeta;
 import com.sun.awt.AWTUtilities;
 import controlador.BienJpaController;
 import controlador.Conexion;
@@ -22,13 +24,13 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import rojerusan.RSPanelsSlider;
 import rojerusan.RSTableMetro;
-import vista.Departamento;
+import entidades.Departamento;
 
 /**
  *
@@ -41,6 +43,7 @@ public class Principal extends javax.swing.JFrame {
     String ruta2 = System.getProperty("file.separator") + "src" +
         System.getProperty("file.separator") + "imagenes" +
         System.getProperty("file.separator") + "blanco.jpg";
+    private Tarjeta tarjeta;
     private static Principal interfazPrincipal = null;
     /**
      * Creates new form Principal
@@ -60,16 +63,16 @@ public class Principal extends javax.swing.JFrame {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cmbDep.getModel();
         model.removeAllElements();
         DepartamentoJpaController controladorDepartamento = new DepartamentoJpaController(Conexion.getInstancia().getEntityManager());
-        List<vista.Departamento> arregloDepartamento = controladorDepartamento.findDepartamentoEntities();
-        for(vista.Departamento departamento : arregloDepartamento)
+        List<entidades.Departamento> arregloDepartamento = controladorDepartamento.findDepartamentoEntities();
+        for(entidades.Departamento departamento : arregloDepartamento)
         {
             model.addElement(departamento.getDescripcion());
         }
         model = (DefaultComboBoxModel) cmbCuenta.getModel();
         model.removeAllElements();
         CuentaJpaController controladorCuenta = new CuentaJpaController(Conexion.getInstancia().getEntityManager());
-        List<vista.Cuenta> arregloCuenta = controladorCuenta.findCuentaEntities();
-        for(vista.Cuenta cuenta : arregloCuenta)
+        List<entidades.Cuenta> arregloCuenta = controladorCuenta.findCuentaEntities();
+        for(entidades.Cuenta cuenta : arregloCuenta)
         {
             model.addElement(cuenta.getNombre());
         }
@@ -233,6 +236,7 @@ public class Principal extends javax.swing.JFrame {
         fondoTblArticulo = new rojerusan.RSMaterialButtonRectangle();
         btnVincular = new rojerusan.RSMaterialButtonRectangle();
         btnReiniciarTR = new rojerusan.RSMaterialButtonRectangle();
+        btnGuardarTR = new rojerusan.RSMaterialButtonRectangle();
         lblarticulo3 = new javax.swing.JLabel();
         jmpEstadoR = new jcMousePanel.jcMousePanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -912,14 +916,24 @@ public class Principal extends javax.swing.JFrame {
             new String [] {
                 "Código", "Descripción", "Costo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtblArticulos.setColorBackgoundHead(new java.awt.Color(0, 54, 102));
         jtblArticulos.setColorBordeFilas(new java.awt.Color(255, 255, 255));
         jtblArticulos.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
         jtblArticulos.setColorFilasForeground1(new java.awt.Color(0, 54, 102));
         jtblArticulos.setColorFilasForeground2(new java.awt.Color(0, 54, 102));
         jtblArticulos.setColorSelBackgound(new java.awt.Color(0, 54, 102));
+        jtblArticulos.setColumnSelectionAllowed(true);
         jScrollPane6.setViewportView(jtblArticulos);
+        jtblArticulos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jmpTarjetaR.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 840, 350));
 
@@ -928,10 +942,23 @@ public class Principal extends javax.swing.JFrame {
         jmpTarjetaR.add(fondoTblArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 880, 390));
 
         btnVincular.setText("vincular");
+        btnVincular.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVincularMouseClicked(evt);
+            }
+        });
         jmpTarjetaR.add(btnVincular, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 640, 190, -1));
 
         btnReiniciarTR.setText("Reiniciar");
         jmpTarjetaR.add(btnReiniciarTR, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 640, 190, -1));
+
+        btnGuardarTR.setText("Guardar");
+        btnGuardarTR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarTRMouseClicked(evt);
+            }
+        });
+        jmpTarjetaR.add(btnGuardarTR, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 640, 200, -1));
 
         lblarticulo3.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 36)); // NOI18N
         lblarticulo3.setForeground(new java.awt.Color(255, 255, 255));
@@ -1124,7 +1151,7 @@ public class Principal extends javax.swing.JFrame {
         BienJpaController controladorBien = new BienJpaController(Conexion.getInstancia().getEntityManager());
         DepartamentoJpaController controladorDepartamento = new DepartamentoJpaController((Conexion.getInstancia().getEntityManager()));
         CuentaJpaController controladorCuenta = new CuentaJpaController(Conexion.getInstancia().getEntityManager());
-        vista.Bien bien = new vista.Bien();
+        entidades.Bien bien = new entidades.Bien();
         bien.setCodigo(txtCodigo.getText());
         bien.setDescripcion(txtDes.getText());
         bien.setDepartamentoId(controladorDepartamento.findeDepartamento(cmbDep.getSelectedItem().toString()));
@@ -1151,7 +1178,7 @@ public class Principal extends javax.swing.JFrame {
          * Se ordenan los datos del formulario para ingresarlos a la base de datos
          */
         EmpleadoJpaController controladorEmpleado = new EmpleadoJpaController(Conexion.getInstancia().getEntityManager());
-        vista.Empleado empleado = new vista.Empleado();
+        entidades.Empleado empleado = new entidades.Empleado();
         empleado.setNombres(txtnombreE.getText());
         empleado.setApellidos(txtapellidoE.getText());
         empleado.setDpi(txtdpi.getText());
@@ -1174,7 +1201,40 @@ public class Principal extends javax.swing.JFrame {
 
     private void btntarjetaRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btntarjetaRMouseClicked
         rsmenu.setPanelSlider((int)1.2,jmpTarjetaR, RSPanelsSlider.DIRECT.LEFT);
+        DefaultTableModel modeloTabla = (DefaultTableModel) jtblArticulos.getModel();
+        modeloTabla.setRowCount(0);
+        BienJpaController controladorBien = new BienJpaController(Conexion.getInstancia().getEntityManager());
+        List<entidades.Bien> arregloBien = controladorBien.findBienEntities();
+        for(entidades.Bien bien : arregloBien)
+        {
+            modeloTabla.addRow(new Object[]{bien.getCodigo(), bien.getDescripcion(), bien.getPrecioUnitario()});
+        }
+        DefaultComboBoxModel modeloEmpleado = (DefaultComboBoxModel) cmbEmpleado.getModel();
+        modeloEmpleado.removeAllElements();
+        EmpleadoJpaController controladorEmpleado = new EmpleadoJpaController(Conexion.getInstancia().getEntityManager());
+        List<entidades.Empleado> arregloEmpleado = controladorEmpleado.findEmpleadoEntities();
+        for(entidades.Empleado empleado : arregloEmpleado)
+        {
+            modeloEmpleado.addElement(empleado.getNombres());
+        }
+        tarjeta = new Tarjeta();
     }//GEN-LAST:event_btntarjetaRMouseClicked
+
+    private void btnVincularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVincularMouseClicked
+        cmbEmpleado.setEnabled(false);//código, descripcion, costo
+        Articulo_Tarjeta articuloNuevo = new Articulo_Tarjeta(jtblArticulos.getValueAt(jtblArticulos.getSelectedRow(), 0).toString(),
+        jtblArticulos.getValueAt(jtblArticulos.getSelectedRow(), 1).toString(), Double.parseDouble(jtblArticulos.getValueAt(jtblArticulos.getSelectedRow(), 2).toString()));
+        tarjeta.agregarArticulo(articuloNuevo);
+    }//GEN-LAST:event_btnVincularMouseClicked
+
+    private void btnGuardarTRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarTRMouseClicked
+        // Validación de la tarjeta de responsabilidad
+        EmpleadoJpaController controladorEmpleado = new EmpleadoJpaController(Conexion.getInstancia().getEntityManager());
+        entidades.Empleado empleado = controladorEmpleado.findEmpleado(cmbEmpleado.getSelectedItem().toString());
+        tarjeta.guardar(empleado);
+        JOptionPane.showMessageDialog(this, "Tarjeta guardada");
+        cmbEmpleado.setEnabled(true);
+    }//GEN-LAST:event_btnGuardarTRMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1217,6 +1277,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botones;
     private javax.swing.JButton btnEstadoR;
+    private rojerusan.RSMaterialButtonRectangle btnGuardarTR;
     private rojerusan.RSMaterialButtonRectangle btnReiniciarTR;
     private rojerusan.RSMaterialButtonRectangle btnVincular;
     public javax.swing.JButton btnfinanciero;

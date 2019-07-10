@@ -5,13 +5,12 @@
  */
 package Tarjeta_Responsabilidad;
 
-import financiero.Articulos;
-import java.util.List;
+
 
 /**
  *
  * @author Nahomi
  */
 public interface Responsabilidad {
-    public List<Articulos> listar();
+    public void guardar(entidades.Empleado empleado);
 }

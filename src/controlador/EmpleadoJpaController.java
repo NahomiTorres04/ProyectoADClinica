@@ -12,12 +12,13 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import vista.TarjetaResponsabilidad;
+import entidades.TarjetaResponsabilidad;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
-import vista.Empleado;
+import javax.persistence.TypedQuery;
+import entidades.Empleado;
 
 /**
  *
@@ -183,6 +184,20 @@ public class EmpleadoJpaController implements Serializable {
         try {
             return em.find(Empleado.class, id);
         } finally {
+            em.close();
+        }
+    }
+    
+    public Empleado findEmpleado(String nombres)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            TypedQuery<Empleado> query = em.createNamedQuery("Empleado.findByNombres", Empleado.class);
+            query.setParameter("nombres", nombres);
+            List<Empleado> arreglo = query.getResultList();
+            return arreglo.remove(0);
+        }finally{
             em.close();
         }
     }

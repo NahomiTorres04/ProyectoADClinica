@@ -39,9 +39,9 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setBackground(new Color(0,0,0,0));
         cmbusuario.setBackground(new Color(0,0,0,0));
         UsuarioJpaController usuarioControlador = new UsuarioJpaController(Conexion.getInstancia().getEntityManager());
-        List<vista.Usuario> usuarios = usuarioControlador.findUsuarioEntities();
+        List<entidades.Usuario> usuarios = usuarioControlador.findUsuarioEntities();
         DefaultComboBoxModel model = (DefaultComboBoxModel) cmbusuario.getModel();
-        for(vista.Usuario usuario : usuarios)
+        for(entidades.Usuario usuario : usuarios)
         {
             model.addElement(usuario.getNombreUsuario());
         }
@@ -546,7 +546,7 @@ public class Login extends javax.swing.JFrame {
     private void lbIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIngresarMouseClicked
         String nombreUsuario = cmbusuario.getSelectedItem().toString();
         UsuarioJpaController usuarioControlador = new UsuarioJpaController(Conexion.getInstancia().getEntityManager());
-        vista.Usuario usuario = usuarioControlador.findUsuario(nombreUsuario);
+        entidades.Usuario usuario = usuarioControlador.findUsuario(nombreUsuario);
         CreadorUsuario creador = new CreadorUsuario(fabrica);
         Usuario usuarioActual = creador.crear(usuario.getTipo());
         usuarioActual.activarPermisos();
@@ -588,12 +588,12 @@ public class Login extends javax.swing.JFrame {
                     String contraseñaCifrada = DigestUtils.md5Hex(contraseña);
                     //al tener la contraseña cifrada, se procede a la comparación
                     UsuarioJpaController usuarioControlador = new UsuarioJpaController(Conexion.getInstancia().getEntityManager());
-                    vista.Usuario usuario = usuarioControlador.findUsuario(1);
+                    entidades.Usuario usuario = usuarioControlador.findUsuario(1);
                     if(contraseñaCifrada.equals(usuario.getPassword())) //si la contraseña es igual
                     {
                         //se procede a ingresar el nuevo usuario
                         //CONSIDERAR PONER ESTO EN UNA CLASE DIFERENTE AL FRAME, RESPETANTO SRP
-                        vista.Usuario usuarioIngresado = new vista.Usuario();
+                        entidades.Usuario usuarioIngresado = new entidades.Usuario();
                         usuarioIngresado.setNombre(txtNombreN.getText());
                         usuarioIngresado.setApellido(txtApellidoN.getText());
                         usuarioIngresado.setNombreUsuario(txtUsuarioN.getText());

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author nahomi
+ * @author Alex de León Véliz <alexdlveliz@hotmail.com>
  */
 @Entity
 @Table(name = "bien")
@@ -72,12 +72,12 @@ public class Bien implements Serializable {
     @JoinColumn(name = "cuenta_id", referencedColumnName = "id")
     @ManyToOne
     private Cuenta cuentaId;
-    @JoinColumn(name = "contenido_id", referencedColumnName = "id")
-    @ManyToOne
-    private Contenido contenidoId;
     @JoinColumn(name = "departamento_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Departamento departamentoId;
+    @JoinColumn(name = "tarjeta_responsabilidad_id", referencedColumnName = "id")
+    @ManyToOne
+    private TarjetaResponsabilidad tarjetaResponsabilidadId;
 
     public Bien() {
     }
@@ -174,20 +174,20 @@ public class Bien implements Serializable {
         this.cuentaId = cuentaId;
     }
 
-    public Contenido getContenidoId() {
-        return contenidoId;
-    }
-
-    public void setContenidoId(Contenido contenidoId) {
-        this.contenidoId = contenidoId;
-    }
-
     public Departamento getDepartamentoId() {
         return departamentoId;
     }
 
     public void setDepartamentoId(Departamento departamentoId) {
         this.departamentoId = departamentoId;
+    }
+
+    public TarjetaResponsabilidad getTarjetaResponsabilidadId() {
+        return tarjetaResponsabilidadId;
+    }
+
+    public void setTarjetaResponsabilidadId(TarjetaResponsabilidad tarjetaResponsabilidadId) {
+        this.tarjetaResponsabilidadId = tarjetaResponsabilidadId;
     }
 
     @Override
@@ -212,6 +212,7 @@ public class Bien implements Serializable {
 
     @Override
     public String toString() {
-        return "vista.Bien[ id=" + id + " ]";
+        return "entidades.Bien[ id=" + id + " ]";
     }
+    
 }

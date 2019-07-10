@@ -6,17 +6,18 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
+import entidades.Bien;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import vista.Bien;
-import vista.Cuenta;
-import vista.Contenido;
-import vista.Departamento;
+import entidades.Cuenta;
+import entidades.Departamento;
+import entidades.TarjetaResponsabilidad;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,7 +28,7 @@ public class BienJpaController implements Serializable {
     public BienJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManager em;
+    private EntityManager em = null;
 
     public EntityManager getEntityManager() {
         return this.em;
@@ -43,28 +44,28 @@ public class BienJpaController implements Serializable {
                 cuentaId = em.getReference(cuentaId.getClass(), cuentaId.getId());
                 bien.setCuentaId(cuentaId);
             }
-            Contenido contenidoId = bien.getContenidoId();
-            if (contenidoId != null) {
-                contenidoId = em.getReference(contenidoId.getClass(), contenidoId.getId());
-                bien.setContenidoId(contenidoId);
-            }
             Departamento departamentoId = bien.getDepartamentoId();
             if (departamentoId != null) {
                 departamentoId = em.getReference(departamentoId.getClass(), departamentoId.getId());
                 bien.setDepartamentoId(departamentoId);
+            }
+            TarjetaResponsabilidad tarjetaResponsabilidadId = bien.getTarjetaResponsabilidadId();
+            if (tarjetaResponsabilidadId != null) {
+                tarjetaResponsabilidadId = em.getReference(tarjetaResponsabilidadId.getClass(), tarjetaResponsabilidadId.getId());
+                bien.setTarjetaResponsabilidadId(tarjetaResponsabilidadId);
             }
             em.persist(bien);
             if (cuentaId != null) {
                 cuentaId.getBienCollection().add(bien);
                 cuentaId = em.merge(cuentaId);
             }
-            if (contenidoId != null) {
-                contenidoId.getBienCollection().add(bien);
-                contenidoId = em.merge(contenidoId);
-            }
             if (departamentoId != null) {
                 departamentoId.getBienCollection().add(bien);
                 departamentoId = em.merge(departamentoId);
+            }
+            if (tarjetaResponsabilidadId != null) {
+                tarjetaResponsabilidadId.getBienCollection().add(bien);
+                tarjetaResponsabilidadId = em.merge(tarjetaResponsabilidadId);
             }
             em.getTransaction().commit();
         } finally {
@@ -82,21 +83,21 @@ public class BienJpaController implements Serializable {
             Bien persistentBien = em.find(Bien.class, bien.getId());
             Cuenta cuentaIdOld = persistentBien.getCuentaId();
             Cuenta cuentaIdNew = bien.getCuentaId();
-            Contenido contenidoIdOld = persistentBien.getContenidoId();
-            Contenido contenidoIdNew = bien.getContenidoId();
             Departamento departamentoIdOld = persistentBien.getDepartamentoId();
             Departamento departamentoIdNew = bien.getDepartamentoId();
+            TarjetaResponsabilidad tarjetaResponsabilidadIdOld = persistentBien.getTarjetaResponsabilidadId();
+            TarjetaResponsabilidad tarjetaResponsabilidadIdNew = bien.getTarjetaResponsabilidadId();
             if (cuentaIdNew != null) {
                 cuentaIdNew = em.getReference(cuentaIdNew.getClass(), cuentaIdNew.getId());
                 bien.setCuentaId(cuentaIdNew);
             }
-            if (contenidoIdNew != null) {
-                contenidoIdNew = em.getReference(contenidoIdNew.getClass(), contenidoIdNew.getId());
-                bien.setContenidoId(contenidoIdNew);
-            }
             if (departamentoIdNew != null) {
                 departamentoIdNew = em.getReference(departamentoIdNew.getClass(), departamentoIdNew.getId());
                 bien.setDepartamentoId(departamentoIdNew);
+            }
+            if (tarjetaResponsabilidadIdNew != null) {
+                tarjetaResponsabilidadIdNew = em.getReference(tarjetaResponsabilidadIdNew.getClass(), tarjetaResponsabilidadIdNew.getId());
+                bien.setTarjetaResponsabilidadId(tarjetaResponsabilidadIdNew);
             }
             bien = em.merge(bien);
             if (cuentaIdOld != null && !cuentaIdOld.equals(cuentaIdNew)) {
@@ -107,14 +108,6 @@ public class BienJpaController implements Serializable {
                 cuentaIdNew.getBienCollection().add(bien);
                 cuentaIdNew = em.merge(cuentaIdNew);
             }
-            if (contenidoIdOld != null && !contenidoIdOld.equals(contenidoIdNew)) {
-                contenidoIdOld.getBienCollection().remove(bien);
-                contenidoIdOld = em.merge(contenidoIdOld);
-            }
-            if (contenidoIdNew != null && !contenidoIdNew.equals(contenidoIdOld)) {
-                contenidoIdNew.getBienCollection().add(bien);
-                contenidoIdNew = em.merge(contenidoIdNew);
-            }
             if (departamentoIdOld != null && !departamentoIdOld.equals(departamentoIdNew)) {
                 departamentoIdOld.getBienCollection().remove(bien);
                 departamentoIdOld = em.merge(departamentoIdOld);
@@ -122,6 +115,14 @@ public class BienJpaController implements Serializable {
             if (departamentoIdNew != null && !departamentoIdNew.equals(departamentoIdOld)) {
                 departamentoIdNew.getBienCollection().add(bien);
                 departamentoIdNew = em.merge(departamentoIdNew);
+            }
+            if (tarjetaResponsabilidadIdOld != null && !tarjetaResponsabilidadIdOld.equals(tarjetaResponsabilidadIdNew)) {
+                tarjetaResponsabilidadIdOld.getBienCollection().remove(bien);
+                tarjetaResponsabilidadIdOld = em.merge(tarjetaResponsabilidadIdOld);
+            }
+            if (tarjetaResponsabilidadIdNew != null && !tarjetaResponsabilidadIdNew.equals(tarjetaResponsabilidadIdOld)) {
+                tarjetaResponsabilidadIdNew.getBienCollection().add(bien);
+                tarjetaResponsabilidadIdNew = em.merge(tarjetaResponsabilidadIdNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -157,15 +158,15 @@ public class BienJpaController implements Serializable {
                 cuentaId.getBienCollection().remove(bien);
                 cuentaId = em.merge(cuentaId);
             }
-            Contenido contenidoId = bien.getContenidoId();
-            if (contenidoId != null) {
-                contenidoId.getBienCollection().remove(bien);
-                contenidoId = em.merge(contenidoId);
-            }
             Departamento departamentoId = bien.getDepartamentoId();
             if (departamentoId != null) {
                 departamentoId.getBienCollection().remove(bien);
                 departamentoId = em.merge(departamentoId);
+            }
+            TarjetaResponsabilidad tarjetaResponsabilidadId = bien.getTarjetaResponsabilidadId();
+            if (tarjetaResponsabilidadId != null) {
+                tarjetaResponsabilidadId.getBienCollection().remove(bien);
+                tarjetaResponsabilidadId = em.merge(tarjetaResponsabilidadId);
             }
             em.remove(bien);
             em.getTransaction().commit();
@@ -205,6 +206,20 @@ public class BienJpaController implements Serializable {
         try {
             return em.find(Bien.class, id);
         } finally {
+            em.close();
+        }
+    }
+    
+    public Bien findBien(String codigo)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            TypedQuery<Bien> query = em.createNamedQuery("Bien.findByCodigo", Bien.class);
+            query.setParameter("codigo", codigo);
+            List<Bien> arreglo = query.getResultList();
+            return arreglo.remove(0);
+        }finally{
             em.close();
         }
     }

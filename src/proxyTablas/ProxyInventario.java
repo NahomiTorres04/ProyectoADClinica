@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import vista.Bien;
+import entidades.Bien;
 
 /**
  *

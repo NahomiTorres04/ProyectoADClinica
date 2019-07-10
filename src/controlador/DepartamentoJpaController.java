@@ -12,14 +12,14 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import vista.Contenido;
+import entidades.Bien;
+import entidades.Departamento;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import vista.Bien;
-import vista.Departamento;
 
 /**
  *
@@ -30,16 +30,13 @@ public class DepartamentoJpaController implements Serializable {
     public DepartamentoJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManager em;
+    private EntityManager em = null;
 
     public EntityManager getEntityManager() {
         return this.em;
     }
 
     public void create(Departamento departamento) {
-        if (departamento.getContenidoCollection() == null) {
-            departamento.setContenidoCollection(new ArrayList<Contenido>());
-        }
         if (departamento.getBienCollection() == null) {
             departamento.setBienCollection(new ArrayList<Bien>());
         }
@@ -47,12 +44,6 @@ public class DepartamentoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Contenido> attachedContenidoCollection = new ArrayList<Contenido>();
-            for (Contenido contenidoCollectionContenidoToAttach : departamento.getContenidoCollection()) {
-                contenidoCollectionContenidoToAttach = em.getReference(contenidoCollectionContenidoToAttach.getClass(), contenidoCollectionContenidoToAttach.getId());
-                attachedContenidoCollection.add(contenidoCollectionContenidoToAttach);
-            }
-            departamento.setContenidoCollection(attachedContenidoCollection);
             Collection<Bien> attachedBienCollection = new ArrayList<Bien>();
             for (Bien bienCollectionBienToAttach : departamento.getBienCollection()) {
                 bienCollectionBienToAttach = em.getReference(bienCollectionBienToAttach.getClass(), bienCollectionBienToAttach.getId());
@@ -60,15 +51,6 @@ public class DepartamentoJpaController implements Serializable {
             }
             departamento.setBienCollection(attachedBienCollection);
             em.persist(departamento);
-            for (Contenido contenidoCollectionContenido : departamento.getContenidoCollection()) {
-                Departamento oldDepartamentoIdOfContenidoCollectionContenido = contenidoCollectionContenido.getDepartamentoId();
-                contenidoCollectionContenido.setDepartamentoId(departamento);
-                contenidoCollectionContenido = em.merge(contenidoCollectionContenido);
-                if (oldDepartamentoIdOfContenidoCollectionContenido != null) {
-                    oldDepartamentoIdOfContenidoCollectionContenido.getContenidoCollection().remove(contenidoCollectionContenido);
-                    oldDepartamentoIdOfContenidoCollectionContenido = em.merge(oldDepartamentoIdOfContenidoCollectionContenido);
-                }
-            }
             for (Bien bienCollectionBien : departamento.getBienCollection()) {
                 Departamento oldDepartamentoIdOfBienCollectionBien = bienCollectionBien.getDepartamentoId();
                 bienCollectionBien.setDepartamentoId(departamento);
@@ -92,8 +74,6 @@ public class DepartamentoJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Departamento persistentDepartamento = em.find(Departamento.class, departamento.getId());
-            Collection<Contenido> contenidoCollectionOld = persistentDepartamento.getContenidoCollection();
-            Collection<Contenido> contenidoCollectionNew = departamento.getContenidoCollection();
             Collection<Bien> bienCollectionOld = persistentDepartamento.getBienCollection();
             Collection<Bien> bienCollectionNew = departamento.getBienCollection();
             List<String> illegalOrphanMessages = null;
@@ -108,13 +88,6 @@ public class DepartamentoJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Collection<Contenido> attachedContenidoCollectionNew = new ArrayList<Contenido>();
-            for (Contenido contenidoCollectionNewContenidoToAttach : contenidoCollectionNew) {
-                contenidoCollectionNewContenidoToAttach = em.getReference(contenidoCollectionNewContenidoToAttach.getClass(), contenidoCollectionNewContenidoToAttach.getId());
-                attachedContenidoCollectionNew.add(contenidoCollectionNewContenidoToAttach);
-            }
-            contenidoCollectionNew = attachedContenidoCollectionNew;
-            departamento.setContenidoCollection(contenidoCollectionNew);
             Collection<Bien> attachedBienCollectionNew = new ArrayList<Bien>();
             for (Bien bienCollectionNewBienToAttach : bienCollectionNew) {
                 bienCollectionNewBienToAttach = em.getReference(bienCollectionNewBienToAttach.getClass(), bienCollectionNewBienToAttach.getId());
@@ -123,23 +96,6 @@ public class DepartamentoJpaController implements Serializable {
             bienCollectionNew = attachedBienCollectionNew;
             departamento.setBienCollection(bienCollectionNew);
             departamento = em.merge(departamento);
-            for (Contenido contenidoCollectionOldContenido : contenidoCollectionOld) {
-                if (!contenidoCollectionNew.contains(contenidoCollectionOldContenido)) {
-                    contenidoCollectionOldContenido.setDepartamentoId(null);
-                    contenidoCollectionOldContenido = em.merge(contenidoCollectionOldContenido);
-                }
-            }
-            for (Contenido contenidoCollectionNewContenido : contenidoCollectionNew) {
-                if (!contenidoCollectionOld.contains(contenidoCollectionNewContenido)) {
-                    Departamento oldDepartamentoIdOfContenidoCollectionNewContenido = contenidoCollectionNewContenido.getDepartamentoId();
-                    contenidoCollectionNewContenido.setDepartamentoId(departamento);
-                    contenidoCollectionNewContenido = em.merge(contenidoCollectionNewContenido);
-                    if (oldDepartamentoIdOfContenidoCollectionNewContenido != null && !oldDepartamentoIdOfContenidoCollectionNewContenido.equals(departamento)) {
-                        oldDepartamentoIdOfContenidoCollectionNewContenido.getContenidoCollection().remove(contenidoCollectionNewContenido);
-                        oldDepartamentoIdOfContenidoCollectionNewContenido = em.merge(oldDepartamentoIdOfContenidoCollectionNewContenido);
-                    }
-                }
-            }
             for (Bien bienCollectionNewBien : bienCollectionNew) {
                 if (!bienCollectionOld.contains(bienCollectionNewBien)) {
                     Departamento oldDepartamentoIdOfBienCollectionNewBien = bienCollectionNewBien.getDepartamentoId();
@@ -190,11 +146,6 @@ public class DepartamentoJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            Collection<Contenido> contenidoCollection = departamento.getContenidoCollection();
-            for (Contenido contenidoCollectionContenido : contenidoCollection) {
-                contenidoCollectionContenido.setDepartamentoId(null);
-                contenidoCollectionContenido = em.merge(contenidoCollectionContenido);
             }
             em.remove(departamento);
             em.getTransaction().commit();

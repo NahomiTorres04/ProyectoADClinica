@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package entidades;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author nahomi
+ * @author Alex de León Véliz <alexdlveliz@hotmail.com>
  */
 @Entity
 @Table(name = "cuenta")
@@ -120,7 +120,7 @@ public class Cuenta implements Serializable {
 
     @Override
     public String toString() {
-        return "vista.Cuenta[ id=" + id + " ]";
+        return "entidades.Cuenta[ id=" + id + " ]";
     }
     
 }

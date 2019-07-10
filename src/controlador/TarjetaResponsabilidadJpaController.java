@@ -11,13 +11,13 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import vista.Empleado;
-import vista.Contenido;
+import entidades.Empleado;
+import entidades.Bien;
+import entidades.TarjetaResponsabilidad;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
-import vista.TarjetaResponsabilidad;
 
 /**
  *
@@ -28,15 +28,15 @@ public class TarjetaResponsabilidadJpaController implements Serializable {
     public TarjetaResponsabilidadJpaController(EntityManager em) {
         this.em = em;
     }
-    private EntityManager em;
+    private EntityManager em = null;
 
     public EntityManager getEntityManager() {
         return this.em;
     }
 
     public void create(TarjetaResponsabilidad tarjetaResponsabilidad) {
-        if (tarjetaResponsabilidad.getContenidoCollection() == null) {
-            tarjetaResponsabilidad.setContenidoCollection(new ArrayList<Contenido>());
+        if (tarjetaResponsabilidad.getBienCollection() == null) {
+            tarjetaResponsabilidad.setBienCollection(new ArrayList<Bien>());
         }
         EntityManager em = null;
         try {
@@ -47,24 +47,24 @@ public class TarjetaResponsabilidadJpaController implements Serializable {
                 empleadoId = em.getReference(empleadoId.getClass(), empleadoId.getId());
                 tarjetaResponsabilidad.setEmpleadoId(empleadoId);
             }
-            Collection<Contenido> attachedContenidoCollection = new ArrayList<Contenido>();
-            for (Contenido contenidoCollectionContenidoToAttach : tarjetaResponsabilidad.getContenidoCollection()) {
-                contenidoCollectionContenidoToAttach = em.getReference(contenidoCollectionContenidoToAttach.getClass(), contenidoCollectionContenidoToAttach.getId());
-                attachedContenidoCollection.add(contenidoCollectionContenidoToAttach);
+            Collection<Bien> attachedBienCollection = new ArrayList<Bien>();
+            for (Bien bienCollectionBienToAttach : tarjetaResponsabilidad.getBienCollection()) {
+                bienCollectionBienToAttach = em.getReference(bienCollectionBienToAttach.getClass(), bienCollectionBienToAttach.getId());
+                attachedBienCollection.add(bienCollectionBienToAttach);
             }
-            tarjetaResponsabilidad.setContenidoCollection(attachedContenidoCollection);
+            tarjetaResponsabilidad.setBienCollection(attachedBienCollection);
             em.persist(tarjetaResponsabilidad);
             if (empleadoId != null) {
                 empleadoId.getTarjetaResponsabilidadCollection().add(tarjetaResponsabilidad);
                 empleadoId = em.merge(empleadoId);
             }
-            for (Contenido contenidoCollectionContenido : tarjetaResponsabilidad.getContenidoCollection()) {
-                TarjetaResponsabilidad oldTarjetaResponsabilidadIdOfContenidoCollectionContenido = contenidoCollectionContenido.getTarjetaResponsabilidadId();
-                contenidoCollectionContenido.setTarjetaResponsabilidadId(tarjetaResponsabilidad);
-                contenidoCollectionContenido = em.merge(contenidoCollectionContenido);
-                if (oldTarjetaResponsabilidadIdOfContenidoCollectionContenido != null) {
-                    oldTarjetaResponsabilidadIdOfContenidoCollectionContenido.getContenidoCollection().remove(contenidoCollectionContenido);
-                    oldTarjetaResponsabilidadIdOfContenidoCollectionContenido = em.merge(oldTarjetaResponsabilidadIdOfContenidoCollectionContenido);
+            for (Bien bienCollectionBien : tarjetaResponsabilidad.getBienCollection()) {
+                TarjetaResponsabilidad oldTarjetaResponsabilidadIdOfBienCollectionBien = bienCollectionBien.getTarjetaResponsabilidadId();
+                bienCollectionBien.setTarjetaResponsabilidadId(tarjetaResponsabilidad);
+                bienCollectionBien = em.merge(bienCollectionBien);
+                if (oldTarjetaResponsabilidadIdOfBienCollectionBien != null) {
+                    oldTarjetaResponsabilidadIdOfBienCollectionBien.getBienCollection().remove(bienCollectionBien);
+                    oldTarjetaResponsabilidadIdOfBienCollectionBien = em.merge(oldTarjetaResponsabilidadIdOfBienCollectionBien);
                 }
             }
             em.getTransaction().commit();
@@ -83,19 +83,19 @@ public class TarjetaResponsabilidadJpaController implements Serializable {
             TarjetaResponsabilidad persistentTarjetaResponsabilidad = em.find(TarjetaResponsabilidad.class, tarjetaResponsabilidad.getId());
             Empleado empleadoIdOld = persistentTarjetaResponsabilidad.getEmpleadoId();
             Empleado empleadoIdNew = tarjetaResponsabilidad.getEmpleadoId();
-            Collection<Contenido> contenidoCollectionOld = persistentTarjetaResponsabilidad.getContenidoCollection();
-            Collection<Contenido> contenidoCollectionNew = tarjetaResponsabilidad.getContenidoCollection();
+            Collection<Bien> bienCollectionOld = persistentTarjetaResponsabilidad.getBienCollection();
+            Collection<Bien> bienCollectionNew = tarjetaResponsabilidad.getBienCollection();
             if (empleadoIdNew != null) {
                 empleadoIdNew = em.getReference(empleadoIdNew.getClass(), empleadoIdNew.getId());
                 tarjetaResponsabilidad.setEmpleadoId(empleadoIdNew);
             }
-            Collection<Contenido> attachedContenidoCollectionNew = new ArrayList<Contenido>();
-            for (Contenido contenidoCollectionNewContenidoToAttach : contenidoCollectionNew) {
-                contenidoCollectionNewContenidoToAttach = em.getReference(contenidoCollectionNewContenidoToAttach.getClass(), contenidoCollectionNewContenidoToAttach.getId());
-                attachedContenidoCollectionNew.add(contenidoCollectionNewContenidoToAttach);
+            Collection<Bien> attachedBienCollectionNew = new ArrayList<Bien>();
+            for (Bien bienCollectionNewBienToAttach : bienCollectionNew) {
+                bienCollectionNewBienToAttach = em.getReference(bienCollectionNewBienToAttach.getClass(), bienCollectionNewBienToAttach.getId());
+                attachedBienCollectionNew.add(bienCollectionNewBienToAttach);
             }
-            contenidoCollectionNew = attachedContenidoCollectionNew;
-            tarjetaResponsabilidad.setContenidoCollection(contenidoCollectionNew);
+            bienCollectionNew = attachedBienCollectionNew;
+            tarjetaResponsabilidad.setBienCollection(bienCollectionNew);
             tarjetaResponsabilidad = em.merge(tarjetaResponsabilidad);
             if (empleadoIdOld != null && !empleadoIdOld.equals(empleadoIdNew)) {
                 empleadoIdOld.getTarjetaResponsabilidadCollection().remove(tarjetaResponsabilidad);
@@ -105,20 +105,20 @@ public class TarjetaResponsabilidadJpaController implements Serializable {
                 empleadoIdNew.getTarjetaResponsabilidadCollection().add(tarjetaResponsabilidad);
                 empleadoIdNew = em.merge(empleadoIdNew);
             }
-            for (Contenido contenidoCollectionOldContenido : contenidoCollectionOld) {
-                if (!contenidoCollectionNew.contains(contenidoCollectionOldContenido)) {
-                    contenidoCollectionOldContenido.setTarjetaResponsabilidadId(null);
-                    contenidoCollectionOldContenido = em.merge(contenidoCollectionOldContenido);
+            for (Bien bienCollectionOldBien : bienCollectionOld) {
+                if (!bienCollectionNew.contains(bienCollectionOldBien)) {
+                    bienCollectionOldBien.setTarjetaResponsabilidadId(null);
+                    bienCollectionOldBien = em.merge(bienCollectionOldBien);
                 }
             }
-            for (Contenido contenidoCollectionNewContenido : contenidoCollectionNew) {
-                if (!contenidoCollectionOld.contains(contenidoCollectionNewContenido)) {
-                    TarjetaResponsabilidad oldTarjetaResponsabilidadIdOfContenidoCollectionNewContenido = contenidoCollectionNewContenido.getTarjetaResponsabilidadId();
-                    contenidoCollectionNewContenido.setTarjetaResponsabilidadId(tarjetaResponsabilidad);
-                    contenidoCollectionNewContenido = em.merge(contenidoCollectionNewContenido);
-                    if (oldTarjetaResponsabilidadIdOfContenidoCollectionNewContenido != null && !oldTarjetaResponsabilidadIdOfContenidoCollectionNewContenido.equals(tarjetaResponsabilidad)) {
-                        oldTarjetaResponsabilidadIdOfContenidoCollectionNewContenido.getContenidoCollection().remove(contenidoCollectionNewContenido);
-                        oldTarjetaResponsabilidadIdOfContenidoCollectionNewContenido = em.merge(oldTarjetaResponsabilidadIdOfContenidoCollectionNewContenido);
+            for (Bien bienCollectionNewBien : bienCollectionNew) {
+                if (!bienCollectionOld.contains(bienCollectionNewBien)) {
+                    TarjetaResponsabilidad oldTarjetaResponsabilidadIdOfBienCollectionNewBien = bienCollectionNewBien.getTarjetaResponsabilidadId();
+                    bienCollectionNewBien.setTarjetaResponsabilidadId(tarjetaResponsabilidad);
+                    bienCollectionNewBien = em.merge(bienCollectionNewBien);
+                    if (oldTarjetaResponsabilidadIdOfBienCollectionNewBien != null && !oldTarjetaResponsabilidadIdOfBienCollectionNewBien.equals(tarjetaResponsabilidad)) {
+                        oldTarjetaResponsabilidadIdOfBienCollectionNewBien.getBienCollection().remove(bienCollectionNewBien);
+                        oldTarjetaResponsabilidadIdOfBienCollectionNewBien = em.merge(oldTarjetaResponsabilidadIdOfBienCollectionNewBien);
                     }
                 }
             }
@@ -156,10 +156,10 @@ public class TarjetaResponsabilidadJpaController implements Serializable {
                 empleadoId.getTarjetaResponsabilidadCollection().remove(tarjetaResponsabilidad);
                 empleadoId = em.merge(empleadoId);
             }
-            Collection<Contenido> contenidoCollection = tarjetaResponsabilidad.getContenidoCollection();
-            for (Contenido contenidoCollectionContenido : contenidoCollection) {
-                contenidoCollectionContenido.setTarjetaResponsabilidadId(null);
-                contenidoCollectionContenido = em.merge(contenidoCollectionContenido);
+            Collection<Bien> bienCollection = tarjetaResponsabilidad.getBienCollection();
+            for (Bien bienCollectionBien : bienCollection) {
+                bienCollectionBien.setTarjetaResponsabilidadId(null);
+                bienCollectionBien = em.merge(bienCollectionBien);
             }
             em.remove(tarjetaResponsabilidad);
             em.getTransaction().commit();

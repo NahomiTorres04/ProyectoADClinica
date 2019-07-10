@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package entidades;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author nahomi
+ * @author Alex de León Véliz <alexdlveliz@hotmail.com>
  */
 @Entity
 @Table(name = "departamento")
@@ -45,8 +45,6 @@ public class Departamento implements Serializable {
     private String codigo;
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(mappedBy = "departamentoId")
-    private Collection<Contenido> contenidoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamentoId")
     private Collection<Bien> bienCollection;
 
@@ -82,15 +80,6 @@ public class Departamento implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Contenido> getContenidoCollection() {
-        return contenidoCollection;
-    }
-
-    public void setContenidoCollection(Collection<Contenido> contenidoCollection) {
-        this.contenidoCollection = contenidoCollection;
-    }
-
-    @XmlTransient
     public Collection<Bien> getBienCollection() {
         return bienCollection;
     }
@@ -121,7 +110,7 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
-        return "vista.Departamento[ id=" + id + " ]";
+        return "entidades.Departamento[ id=" + id + " ]";
     }
     
 }

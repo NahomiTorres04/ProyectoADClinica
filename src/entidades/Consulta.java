@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author nahomi
+ * @author Alex de León Véliz <alexdlveliz@hotmail.com>
  */
 @Entity
 @Table(name = "consulta")
@@ -168,7 +168,7 @@ public class Consulta implements Serializable {
 
     @Override
     public String toString() {
-        return "vista.Consulta[ id=" + id + " ]";
+        return "entidades.Consulta[ id=" + id + " ]";
     }
     
 }
