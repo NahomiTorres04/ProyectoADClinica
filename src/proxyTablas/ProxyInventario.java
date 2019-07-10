@@ -78,4 +78,8 @@ public class ProxyInventario implements TableModel
     public void removeTableModelListener(TableModelListener l) {
         objetoReal.removeTableModelListener(l);
     }
+    public DefaultTableModel getModel()
+    {
+        return objetoReal;
+    }
 }

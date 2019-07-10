@@ -1119,6 +1119,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnnuevoarticuloMouseClicked
 
     private void btnverinventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnverinventarioMouseClicked
+        BienJpaController controladorBien = new BienJpaController(Conexion.getInstancia().getEntityManager());
+        List<entidades.Bien> arregloBienes = controladorBien.findBienEntities();
+        proxyTablas.ProxyInventario pInventario = new proxyTablas.ProxyInventario(arregloBienes);
+        tblInventario.setModel(pInventario.getModel());
         rsmenu.setPanelSlider((int)1.2,jmpVerInventario, RSPanelsSlider.DIRECT.LEFT);
     }//GEN-LAST:event_btnverinventarioMouseClicked
 
