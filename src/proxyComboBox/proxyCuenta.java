@@ -53,4 +53,8 @@ public class proxyCuenta implements ComboBoxModel<Cuenta>{
     public void removeListDataListener(ListDataListener l) {
         objetoReal.removeListDataListener(l);
     }
+    public DefaultComboBoxModel getModel()
+    {
+        return objetoReal;
+    }
 }

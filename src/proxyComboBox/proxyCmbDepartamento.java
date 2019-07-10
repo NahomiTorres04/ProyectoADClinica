@@ -53,5 +53,8 @@ public class proxyCmbDepartamento implements ComboBoxModel<Departamento>{
     public void removeListDataListener(ListDataListener l) {
         objetoReal.removeListDataListener(l);
     }
-    
+    public DefaultComboBoxModel getModel()
+    {
+        return objetoReal;
+    }
 }

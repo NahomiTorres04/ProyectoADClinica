@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import rojerusan.RSPanelsSlider;
 import rojerusan.RSTableMetro;
 import entidades.Departamento;
+import javax.swing.ComboBoxModel;
 
 /**
  *
@@ -45,11 +46,13 @@ public class Principal extends javax.swing.JFrame {
         System.getProperty("file.separator") + "blanco.jpg";
     private Tarjeta tarjeta;
     private static Principal interfazPrincipal = null;
+    private ComboBoxModel<Departamento>  modelod;  
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        this.modelod = modelod;
         this.setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this,false); //hacemos el frame transparente
         transparencia(ruta1, 400,1000, 0.85f, minimenu);
@@ -60,22 +63,14 @@ public class Principal extends javax.swing.JFrame {
         compound = BorderFactory.createCompoundBorder(empty, new redondear(crl));
         botones.setBorder(compound);
         //USAR PROXY POSTERIORMENTE
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cmbDep.getModel();
-        model.removeAllElements();
         DepartamentoJpaController controladorDepartamento = new DepartamentoJpaController(Conexion.getInstancia().getEntityManager());
         List<entidades.Departamento> arregloDepartamento = controladorDepartamento.findDepartamentoEntities();
-        for(entidades.Departamento departamento : arregloDepartamento)
-        {
-            model.addElement(departamento.getDescripcion());
-        }
-        model = (DefaultComboBoxModel) cmbCuenta.getModel();
-        model.removeAllElements();
+        proxyComboBox.proxyCmbDepartamento pDepartamento = new proxyComboBox.proxyCmbDepartamento(arregloDepartamento);
+        cmbDep.setModel(pDepartamento.getModel());
         CuentaJpaController controladorCuenta = new CuentaJpaController(Conexion.getInstancia().getEntityManager());
         List<entidades.Cuenta> arregloCuenta = controladorCuenta.findCuentaEntities();
-        for(entidades.Cuenta cuenta : arregloCuenta)
-        {
-            model.addElement(cuenta.getNombre());
-        }
+        proxyComboBox.proxyCuenta pCuenta = new proxyComboBox.proxyCuenta(arregloCuenta);
+        cmbDep.setModel(pCuenta.getModel());
     }
     
     public static Principal getInstancia()
@@ -1291,7 +1286,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnverempleados;
     private javax.swing.JButton btnverinventario;
     private javax.swing.JComboBox<String> cmbCuenta;
-    private javax.swing.JComboBox<String> cmbDep;
+    private javax.swing.JComboBox<Departamento> cmbDep;
     private javax.swing.JComboBox<String> cmbDonado;
     private javax.swing.JComboBox<String> cmbEmpleado;
     private javax.swing.JComboBox<String> cmbEstado;
