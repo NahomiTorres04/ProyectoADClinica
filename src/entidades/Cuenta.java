@@ -120,7 +120,7 @@ public class Cuenta implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Cuenta[ id=" + id + " ]";
+        return nombre;
     }
     
 }

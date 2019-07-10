@@ -110,7 +110,7 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Departamento[ id=" + id + " ]";
+        return descripcion;
     }
     
 }
