@@ -10,11 +10,13 @@ import controlador.BienJpaController;
 import controlador.Conexion;
 import controlador.CuentaJpaController;
 import controlador.DepartamentoJpaController;
+import controlador.EmpleadoJpaController;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -22,6 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import rojerusan.RSPanelsSlider;
 import rojerusan.RSTableMetro;
@@ -156,7 +159,7 @@ public class Principal extends javax.swing.JFrame {
         lblsueldo = new javax.swing.JLabel();
         lblnoemergencia = new javax.swing.JLabel();
         txtnombreE = new javax.swing.JTextField();
-        cmblugar = new javax.swing.JTextField();
+        txtlugar = new javax.swing.JTextField();
         txtpuesto = new javax.swing.JTextField();
         txtcargo = new javax.swing.JTextField();
         txtdpi = new javax.swing.JTextField();
@@ -181,10 +184,13 @@ public class Principal extends javax.swing.JFrame {
         fondocargo = new rojerusan.RSMaterialButtonRectangle();
         fondorenglonp = new rojerusan.RSMaterialButtonRectangle();
         fondotelemergencia = new rojerusan.RSMaterialButtonRectangle();
+        datefechadesercion = new rojeru_san.componentes.RSDateChooser();
         fondofechadesersion = new rojerusan.RSMaterialButtonRectangle();
         fondoprofesion = new rojerusan.RSMaterialButtonRectangle();
         fondolugar = new rojerusan.RSMaterialButtonRectangle();
+        datefechacontratacion = new rojeru_san.componentes.RSDateChooser();
         fondofechacontratacion = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle5 = new rojerusan.RSMaterialButtonRectangle();
         jparticulo = new jcMousePanel.jcMousePanel();
         lblarticulo = new javax.swing.JLabel();
         lblcuenta = new javax.swing.JLabel();
@@ -567,9 +573,9 @@ public class Principal extends javax.swing.JFrame {
         txtnombreE.setBorder(null);
         jmpIngresarEmpleado.add(txtnombreE, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 300, 30));
 
-        cmblugar.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
-        cmblugar.setBorder(null);
-        jmpIngresarEmpleado.add(cmblugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 560, 330, 30));
+        txtlugar.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
+        txtlugar.setBorder(null);
+        jmpIngresarEmpleado.add(txtlugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 560, 330, 30));
 
         txtpuesto.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 18)); // NOI18N
         txtpuesto.setBorder(null);
@@ -677,6 +683,10 @@ public class Principal extends javax.swing.JFrame {
         fondotelemergencia.setEnabled(false);
         jmpIngresarEmpleado.add(fondotelemergencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 550, 200, 50));
 
+        datefechadesercion.setEnabled(false);
+        datefechadesercion.setName("datefechadesercion"); // NOI18N
+        jmpIngresarEmpleado.add(datefechadesercion, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, 380, -1));
+
         fondofechadesersion.setBackground(new java.awt.Color(186, 240, 255));
         fondofechadesersion.setEnabled(false);
         fondofechadesersion.addActionListener(new java.awt.event.ActionListener() {
@@ -694,9 +704,21 @@ public class Principal extends javax.swing.JFrame {
         fondolugar.setEnabled(false);
         jmpIngresarEmpleado.add(fondolugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 350, 50));
 
+        datefechacontratacion.setName("datefechacontratacion"); // NOI18N
+        jmpIngresarEmpleado.add(datefechacontratacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 380, -1));
+
         fondofechacontratacion.setBackground(new java.awt.Color(186, 240, 255));
         fondofechacontratacion.setEnabled(false);
         jmpIngresarEmpleado.add(fondofechacontratacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 400, 50));
+
+        rSMaterialButtonRectangle5.setBackground(new java.awt.Color(0, 3, 102));
+        rSMaterialButtonRectangle5.setText("Ingresar empleado");
+        rSMaterialButtonRectangle5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rSMaterialButtonRectangle5MouseClicked(evt);
+            }
+        });
+        jmpIngresarEmpleado.add(rSMaterialButtonRectangle5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 630, 210, -1));
 
         rsmenu.add(jmpIngresarEmpleado, "card7");
 
@@ -992,6 +1014,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void rSMaterialButtonRectangle7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle7MouseClicked
         /**
+         * INGRESO DE ARTÍCULOS
          * se ordenaran los datos del formulario para ingresarlos a la base de datos
          */
         BienJpaController controladorBien = new BienJpaController(Conexion.getInstancia().getEntityManager());
@@ -1015,45 +1038,73 @@ public class Principal extends javax.swing.JFrame {
         else bien.setEstado((short) 0); //Está en mal estado
         bien.setCuentaId(controladorCuenta.findCuenta(cmbCuenta.getSelectedItem().toString()));
         controladorBien.create(bien);
+        JOptionPane.showMessageDialog(null, "Bien ingresado");
     }//GEN-LAST:event_rSMaterialButtonRectangle7MouseClicked
+
+    private void rSMaterialButtonRectangle5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle5MouseClicked
+        /**
+         * INGRESO DE EMPLEADOS
+         * Se ordenan los datos del formulario para ingresarlos a la base de datos
+         */
+        EmpleadoJpaController controladorEmpleado = new EmpleadoJpaController(Conexion.getInstancia().getEntityManager());
+        vista.Empleado empleado = new vista.Empleado();
+        empleado.setNombres(txtnombreE.getText());
+        empleado.setApellidos(txtapellidoE.getText());
+        empleado.setDpi(txtdpi.getText());
+        empleado.setMunicipio(txtmunicipio.getText().toLowerCase());
+        empleado.setDepartamento(cmbdepartamento.getSelectedItem().toString());
+        if(rbtnOtroTipo.isSelected()) empleado.setTipo("otro"); //si otro tipo es seleccionado
+        else empleado.setTipo(cmbtipo.getSelectedItem().toString());
+        if(rbtnOtroClasificacion.isSelected()) empleado.setClasificacion("otro"); //si otra clasificación es seleccionada
+        else empleado.setTipo(cmbclasificacion.getSelectedItem().toString());
+        empleado.setLugar(txtlugar.getText());
+        empleado.setCargo(txtcargo.getText());
+        empleado.setRenglonPresupuestario(cmbrenglonp.getSelectedItem().toString());
+        empleado.setPuesto(txtpuesto.getText());
+        empleado.setFechaInicio(datefechacontratacion.getDatoFecha());
+        empleado.setSueldo(Double.parseDouble(txtsueldo.getText()));
+        empleado.setTelefono(txttelE.getText());
+        controladorEmpleado.create(empleado);
+        JOptionPane.showMessageDialog(this, "Empleado ingresado");
+    }//GEN-LAST:event_rSMaterialButtonRectangle5MouseClicked
 
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Principal().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Principal().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botones;
@@ -1074,9 +1125,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbFungible;
     private javax.swing.JComboBox<String> cmbclasificacion;
     private javax.swing.JComboBox<String> cmbdepartamento;
-    private javax.swing.JTextField cmblugar;
     private javax.swing.JComboBox<String> cmbrenglonp;
     private javax.swing.JComboBox<String> cmbtipo;
+    private rojeru_san.componentes.RSDateChooser datefechacontratacion;
+    private rojeru_san.componentes.RSDateChooser datefechadesercion;
     private rojerusan.RSMaterialButtonRectangle fondoDepartamento;
     private rojerusan.RSMaterialButtonRectangle fondoDpi;
     private rojerusan.RSMaterialButtonRectangle fondoEstadoR;
@@ -1156,6 +1208,7 @@ public class Principal extends javax.swing.JFrame {
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle4;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle5;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle7;
     private javax.swing.JRadioButton rbtnOtroClasificacion;
     private javax.swing.JRadioButton rbtnOtroTipo;
@@ -1171,6 +1224,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtapellidoE;
     private javax.swing.JTextField txtcargo;
     private javax.swing.JTextField txtdpi;
+    private javax.swing.JTextField txtlugar;
     private javax.swing.JTextField txtmunicipio;
     private javax.swing.JTextField txtnombreE;
     private javax.swing.JTextField txtpuesto;
