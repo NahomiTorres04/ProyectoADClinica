@@ -40,11 +40,8 @@ public class Login extends javax.swing.JFrame {
         cmbusuario.setBackground(new Color(0,0,0,0));
         UsuarioJpaController usuarioControlador = new UsuarioJpaController(Conexion.getInstancia().getEntityManager());
         List<entidades.Usuario> usuarios = usuarioControlador.findUsuarioEntities();
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cmbusuario.getModel();
-        for(entidades.Usuario usuario : usuarios)
-        {
-            model.addElement(usuario.getNombreUsuario());
-        }
+        proxyComboBox.proxyCmbUsuarios pUsuarios = new proxyComboBox.proxyCmbUsuarios(usuarios);
+        cmbusuario.setModel(pUsuarios.getModel());
     }
     
     public static Login getInstancia()
@@ -604,8 +601,12 @@ public class Login extends javax.swing.JFrame {
                         usuarioControlador = new UsuarioJpaController(Conexion.getInstancia().getEntityManager());
                         usuarioControlador.create(usuarioIngresado);
                         JOptionPane.showMessageDialog(this, "Usuario Ingresado", "Éxito", JOptionPane.PLAIN_MESSAGE);
+                        usuarioControlador = new UsuarioJpaController(Conexion.getInstancia().getEntityManager());
+                        List<entidades.Usuario> usuarios = usuarioControlador.findUsuarioEntities();
+                        proxyComboBox.proxyCmbUsuarios pUsuarios = new proxyComboBox.proxyCmbUsuarios(usuarios);
+                        cmbusuario.setModel(pUsuarios.getModel());
                     }
-                }    
+                }
             } catch(Exception ex)
             {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -662,41 +663,6 @@ public class Login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btncerrarMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSPanelsSlider RSPIngresar;
@@ -712,7 +678,7 @@ public class Login extends javax.swing.JFrame {
     private rojerusan.RSMaterialButtonCircle cbtning2;
     private rojerusan.RSMaterialButtonCircle cbtnreg;
     private rojerusan.RSMaterialButtonCircle cbtnreg1;
-    private javax.swing.JComboBox<String> cmbusuario;
+    private javax.swing.JComboBox<entidades.Usuario> cmbusuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

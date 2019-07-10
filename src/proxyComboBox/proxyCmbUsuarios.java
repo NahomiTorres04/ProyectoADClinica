@@ -5,7 +5,7 @@
  */
 package proxyComboBox;
 
-import inicioSesion.Usuario;
+import entidades.Usuario;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -17,13 +17,14 @@ import javax.swing.event.ListDataListener;
  */
 public class proxyCmbUsuarios implements ComboBoxModel<Usuario>{
     private DefaultComboBoxModel<Usuario> objetoReal = new DefaultComboBoxModel<>();
-    public proxyCmbUsuarios(List<Usuario> usuarios)
-    {
+
+    public proxyCmbUsuarios(List<entidades.Usuario> usuarios) {
         for(Usuario usuario : usuarios)
         {
-            objetoReal.addElement(usuario);
+            objetoReal.addElement(usuario);;
         }
     }
+    
     @Override
     public void setSelectedItem(Object anItem) {
         objetoReal.setSelectedItem(anItem);
@@ -54,4 +55,8 @@ public class proxyCmbUsuarios implements ComboBoxModel<Usuario>{
         objetoReal.removeListDataListener(l);
     }
     
+    public DefaultComboBoxModel getModel()
+    {
+        return objetoReal;
+    }
 }

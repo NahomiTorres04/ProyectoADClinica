@@ -21,7 +21,9 @@ public class ProxyInventario implements TableModel
     
     public ProxyInventario(List<Bien> bienes)
     {
-        Object[] fila = new Object[6];
+        objetoReal = new DefaultTableModel(new Object[]{"Código", "Descripción",
+        "Cantidad", "Precio unitario", "Estado", "Fungibe", "Total"}, 0);
+        Object[] fila = new Object[7];
         for (Bien bien : bienes)
         {
             fila[0] = bien.getCodigo();

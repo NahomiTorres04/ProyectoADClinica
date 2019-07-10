@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import rojerusan.RSPanelsSlider;
 import rojerusan.RSTableMetro;
 import entidades.Departamento;
+import entidades.Empleado;
 import javax.swing.ComboBoxModel;
 
 /**
@@ -70,7 +71,7 @@ public class Principal extends javax.swing.JFrame {
         CuentaJpaController controladorCuenta = new CuentaJpaController(Conexion.getInstancia().getEntityManager());
         List<entidades.Cuenta> arregloCuenta = controladorCuenta.findCuentaEntities();
         proxyComboBox.proxyCuenta pCuenta = new proxyComboBox.proxyCuenta(arregloCuenta);
-        cmbDep.setModel(pCuenta.getModel());
+        cmbCuenta.setModel(pCuenta.getModel());
     }
     
     public static Principal getInstancia()
@@ -926,9 +927,8 @@ public class Principal extends javax.swing.JFrame {
         jtblArticulos.setColorFilasForeground1(new java.awt.Color(0, 54, 102));
         jtblArticulos.setColorFilasForeground2(new java.awt.Color(0, 54, 102));
         jtblArticulos.setColorSelBackgound(new java.awt.Color(0, 54, 102));
-        jtblArticulos.setColumnSelectionAllowed(true);
+        jtblArticulos.setMultipleSeleccion(false);
         jScrollPane6.setViewportView(jtblArticulos);
-        jtblArticulos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jmpTarjetaR.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 840, 350));
 
@@ -1062,9 +1062,6 @@ public class Principal extends javax.swing.JFrame {
         tblVerEmpleado.setColorFilasForeground2(new java.awt.Color(0, 54, 102));
         tblVerEmpleado.setColorSelBackgound(new java.awt.Color(0, 54, 102));
         jScrollPane5.setViewportView(tblVerEmpleado);
-        if (tblVerEmpleado.getColumnModel().getColumnCount() > 0) {
-            tblVerEmpleado.getColumnModel().getColumn(3).setHeaderValue("Profesión");
-        }
 
         jmpVerEmpleado.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 930, 470));
 
@@ -1107,6 +1104,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbtipoItemStateChanged
 
     private void btnverempleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnverempleadosMouseClicked
+        EmpleadoJpaController controladorEmpleado = new EmpleadoJpaController(Conexion.getInstancia().getEntityManager());
+        List<Empleado> arregloEmpleados = controladorEmpleado.findEmpleadoEntities();
+        proxyTablas.ProxyEmpleado pEmpleado = new proxyTablas.ProxyEmpleado(arregloEmpleados);
+        tblVerEmpleado.setModel(pEmpleado.getModel());
         rsmenu.setPanelSlider((int)1.2,jmpVerEmpleado, RSPanelsSlider.DIRECT.LEFT);
     }//GEN-LAST:event_btnverempleadosMouseClicked
 
@@ -1221,8 +1222,10 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnVincularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVincularMouseClicked
         cmbEmpleado.setEnabled(false);//código, descripcion, costo
-        Articulo_Tarjeta articuloNuevo = new Articulo_Tarjeta(jtblArticulos.getValueAt(jtblArticulos.getSelectedRow(), 0).toString(),
-        jtblArticulos.getValueAt(jtblArticulos.getSelectedRow(), 1).toString(), Double.parseDouble(jtblArticulos.getValueAt(jtblArticulos.getSelectedRow(), 2).toString()));
+        String codigo = (String) jtblArticulos.getValueAt(jtblArticulos.getSelectedRow(), 0);
+        String descripcion = (String) jtblArticulos.getValueAt(jtblArticulos.getSelectedRow(), 1);
+        double costo = (double) jtblArticulos.getValueAt(jtblArticulos.getSelectedRow(), 2);
+        Articulo_Tarjeta articuloNuevo = new Articulo_Tarjeta(codigo, descripcion, costo);
         tarjeta.agregarArticulo(articuloNuevo);
     }//GEN-LAST:event_btnVincularMouseClicked
 
@@ -1235,43 +1238,6 @@ public class Principal extends javax.swing.JFrame {
         cmbEmpleado.setEnabled(true);
     }//GEN-LAST:event_btnGuardarTRMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botones;

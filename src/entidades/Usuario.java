@@ -128,7 +128,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Usuario[ id=" + id + " ]";
+        return this.nombreUsuario;
     }
     
 }

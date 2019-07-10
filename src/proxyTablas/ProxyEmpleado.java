@@ -21,7 +21,9 @@ public class ProxyEmpleado implements TableModel
     
     public ProxyEmpleado(List<Empleado> empleados)
     {
-        Object[] fila = new Object[3];
+        objetoReal = new DefaultTableModel(new Object[]{"Nombre", "Apellido",
+        "Lugar", "Profesión"}, 0);
+        Object[] fila = new Object[4];
         for (Empleado empleado : empleados)
         {
             fila[0] = empleado.getNombres();
@@ -74,5 +76,10 @@ public class ProxyEmpleado implements TableModel
     @Override
     public void removeTableModelListener(TableModelListener l) {
         objetoReal.removeTableModelListener(l);
+    }
+    
+    public DefaultTableModel getModel()
+    {
+        return objetoReal;
     }
 }

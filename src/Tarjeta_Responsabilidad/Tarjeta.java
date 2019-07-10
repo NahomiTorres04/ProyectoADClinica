@@ -7,6 +7,7 @@ package Tarjeta_Responsabilidad;
 
 import java.util.List;
 import entidades.Empleado;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,7 +15,7 @@ import entidades.Empleado;
  */
 public class Tarjeta implements Responsabilidad{
 
-    private List<Articulo_Tarjeta> articulos;
+    private List<Articulo_Tarjeta> articulos = new ArrayList<>();
     
     public void agregarArticulo(Articulo_Tarjeta articulo)
     {

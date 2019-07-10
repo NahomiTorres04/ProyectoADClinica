@@ -39,10 +39,10 @@ public class Articulo_Tarjeta implements Responsabilidad{
         tarjeta.setFungible((short) 1);
         tarjeta.setFecha(new Date());
         controladorTarjeta.create(tarjeta);
-        int id = controladorTarjeta.getTarjetaResponsabilidadCount();
         entidades.Bien bien;
         bien = controladorBien.findBien(codigo);
         bien.setTarjetaResponsabilidadId(tarjeta);
+        controladorBien = new BienJpaController(Conexion.getInstancia().getEntityManager());
         try {
             controladorBien.edit(bien);
         } catch (Exception ex) {
